@@ -1,0 +1,89 @@
+plugins {
+    id "com.android.application"
+    id 'dagger.hilt.android.plugin'
+    id "androidx.navigation.safeargs"
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.youngerhousea.myapplication"
+        minSdkVersion 26
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        dataBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+def retrofit_version = "2.9.0"
+def lifecycle_version = "2.2.0"
+def arch_version = "2.1.0"
+def work_version = "2.4.0"
+def hilt_version = "1.0.0-alpha02"
+def room_version = "2.3.0-alpha03"
+def rxjava3_version = "3.0.7"
+def dagger_version  = "2.30.1-alpha"
+
+dependencies {
+    //noinspection AnnotationProcessorOnCompilePath
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+    implementation "androidx.navigation:navigation-fragment:2.3.1"
+    implementation "androidx.preference:preference:1.1.1"
+    implementation "androidx.navigation:navigation-ui:2.3.1"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
+    testImplementation "androidx.arch.core:core-testing:$arch_version"
+
+    implementation "com.google.dagger:hilt-android:$dagger_version"
+    annotationProcessor "com.google.dagger:hilt-android-compiler:$dagger_version"
+
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_version"
+    annotationProcessor "androidx.hilt:hilt-compiler:$hilt_version"
+    implementation "androidx.work:work-runtime:$work_version"
+
+    androidTestImplementation "androidx.test.ext:junit:1.1.2"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
+
+    testImplementation "junit:junit:4.13.1"
+    implementation 'androidx.annotation:annotation:1.1.0'
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava3:$room_version"
+
+    implementation "com.google.code.gson:gson:2.8.6"
+    implementation "com.google.android.material:material:1.2.1"
+
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava3_version"
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+}
