@@ -9,7 +9,6 @@ import androidx.work.WorkerParameters;
 public class NewsFetchWorker extends Worker {
     public NewsFetchWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
-
     }
 
     @NonNull

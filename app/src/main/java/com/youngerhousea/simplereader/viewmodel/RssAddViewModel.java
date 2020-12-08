@@ -2,10 +2,10 @@ package com.youngerhousea.simplereader.viewmodel;
 
 import androidx.hilt.Assisted;
 import androidx.hilt.lifecycle.ViewModelInject;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 
+import com.youngerhousea.simplereader.data.model.SubscribeRssWithGroup;
 import com.youngerhousea.simplereader.repository.RssAddRepository;
 
 import org.reactivestreams.Subscription;
@@ -18,21 +18,17 @@ import io.reactivex.rxjava3.core.FlowableSubscriber;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RssAddViewModel extends BaseViewModel {
-    private final MutableLiveData<List<String>> _group = new MutableLiveData<>();
     private final RssAddRepository repository;
-    public LiveData<List<String>> getGroup() {
-        return _group;
-    }
+    public final MutableLiveData<List<SubscribeRssWithGroup>> data = new MutableLiveData<>();
+    public MutableLiveData<List<String>> groups;
+    public MutableLiveData<String> urlToAdd;
+    public MutableLiveData<Integer> groupId;
 
     @ViewModelInject
     public RssAddViewModel(@Assisted SavedStateHandle savedStateHandle, RssAddRepository repository) {
 //        TODO:
         this.repository = repository;
-        initGroup();
-    }
-
-    private void initGroup() {
-        repository.getGroup()
+        repository.getAllGroup()
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new FlowableSubscriber<List<String>>() {
@@ -42,12 +38,13 @@ public class RssAddViewModel extends BaseViewModel {
                     }
 
                     @Override
-                    public void onNext(List<String> group) {
-                        _group.setValue(group);
+                    public void onNext(List<String> groupsFromDao) {
+                        groups.setValue(groupsFromDao);
                     }
 
                     @Override
                     public void onError(Throwable t) {
+
                     }
 
                     @Override
@@ -55,5 +52,9 @@ public class RssAddViewModel extends BaseViewModel {
 
                     }
                 });
+    }
+
+    public void addToGroup(String url, int groupId) {
+        repository.insertSubscribeRss(url, groupId);
     }
 }

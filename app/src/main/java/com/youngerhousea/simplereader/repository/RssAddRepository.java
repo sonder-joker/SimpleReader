@@ -1,8 +1,9 @@
 package com.youngerhousea.simplereader.repository;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.youngerhousea.simplereader.data.SubscribeRssDao;
+import com.youngerhousea.simplereader.data.model.Group;
+import com.youngerhousea.simplereader.data.model.SubscribeRss;
+import com.youngerhousea.simplereader.data.model.SubscribeRssWithGroup;
 
 import java.util.List;
 
@@ -16,10 +17,17 @@ public class RssAddRepository {
     @Inject
     public RssAddRepository(SubscribeRssDao subScribeRssDao) {
         this.subScribeRssDao = subScribeRssDao;
-
     }
 
-    public Flowable<List<String>> getGroup() {
-        return subScribeRssDao.loadAllGroup();
+    public Flowable<List<SubscribeRssWithGroup>> getSubscribeRssWithGroupList() {
+        return subScribeRssDao.getAllSubscribeRssWithGroup();
+    }
+
+    public Flowable<List<String>> getAllGroup() {
+        return subScribeRssDao.getAllGroup();
+    }
+
+    public void insertSubscribeRss(String url, int groupId) {
+        subScribeRssDao.insertSubscribeRss(new SubscribeRss(groupId, url));
     }
 }

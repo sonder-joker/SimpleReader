@@ -35,13 +35,13 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     @LayoutRes
     int getLayoutId();
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        Class VType = (Class) ((ParameterizedType) getClass()
+        @SuppressWarnings("unchecked")
+        Class<V> VType = (Class<V>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[1];
-        viewModel = (V) new ViewModelProvider(this).get(VType);
+        viewModel = new ViewModelProvider(this).get(VType);
         viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         return viewDataBinding.getRoot();
     }
@@ -49,7 +49,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewDataBinding.setVariable(getLayoutId(), viewModel);
+        viewDataBinding.setVariable(getBindingVariable(), viewModel);
         viewDataBinding.setLifecycleOwner(this);
     }
 

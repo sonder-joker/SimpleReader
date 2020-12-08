@@ -27,35 +27,13 @@ public class NewsViewModel extends BaseViewModel {
 
     @ViewModelInject
     public NewsViewModel(@Assisted SavedStateHandle savedStateHandle, NewsRepository newsRepository) {
-
         this.newsRepository = newsRepository;
 //        TODO:
         setSubscribeRssList(newsRepository);
     }
 
     private void setSubscribeRssList(NewsRepository newsRepository) {
-        newsRepository.getSubScribeRssDao()
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<SubscribeRss>>() {
-                    @Override
-                    public void onSubscribe(Subscription s) {
 
-                    }
-
-                    @Override
-                    public void onNext(List<SubscribeRss> subscribeRsses) {
-                        _subscribeRssList.setValue(subscribeRsses);
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                    }
-
-                    @Override
-                    public void onComplete() {
-                    }
-                });
     }
 
 

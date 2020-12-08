@@ -11,7 +11,6 @@ import androidx.databinding.library.baseAdapters.BR;
 
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.base.BaseFragment;
-import com.youngerhousea.simplereader.databinding.FragmentMeBinding;
 import com.youngerhousea.simplereader.databinding.FragmentNewsBinding;
 import com.youngerhousea.simplereader.viewmodel.NewsViewModel;
 

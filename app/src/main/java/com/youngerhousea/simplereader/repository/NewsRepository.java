@@ -18,7 +18,4 @@ public class NewsRepository {
         this.subScribeRssDao = subScribeRssDao;
     }
 
-    public Flowable<List<SubscribeRss>> getSubScribeRssDao() {
-        return subScribeRssDao.loadAllSubscribeRss();
-    }
 }
