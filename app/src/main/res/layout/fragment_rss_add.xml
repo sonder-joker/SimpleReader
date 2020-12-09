@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="rssAddViewModel"
             type="com.youngerhousea.simplereader.viewmodel.RssAddViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,36 +31,36 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:text="@string/group"
-                android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:text="@string/group" />
 
             <Spinner
                 android:id="@+id/rss_group"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:entries="@={rssAddViewModel.groups}"
-                android:selectedItemPosition="@={rssAddViewModel.groupId}" />
+                app:selectedItemPosition="@={rssAddViewModel.groupId}"
+                app:spinnerEntries="@{rssAddViewModel.groups}" />
 
             <TextView
-                android:text="@string/url"
-                android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:text="@string/url" />
 
             <EditText
                 android:id="@+id/url_to_add"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:importantForAutofill="no"
                 android:hint="@string/url_you_want_to_add"
-                android:text="@={rssAddViewModel.urlToAdd}"
-                android:inputType="textUri" />
+                android:importantForAutofill="no"
+                android:inputType="textUri"
+                android:text="@={rssAddViewModel.urlToAdd}" />
         </LinearLayout>
 
         <Button
@@ -70,7 +73,7 @@
             android:text="@string/confirm_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            android:onClick="@{() -> rssAddViewModel.addToGroup(rssAddViewModel.urlToAdd, rssAddViewModel.groupId)}"/>
+            android:onClick="@{() -> rssAddViewModel.insertSubscribeRss(rssAddViewModel.groupId, rssAddViewModel.urlToAdd)}"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

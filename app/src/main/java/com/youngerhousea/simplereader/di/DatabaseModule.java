@@ -28,7 +28,7 @@ public class DatabaseModule {
                 context,
                 AppDatabase.class,
                 "app.db"
-        ).fallbackToDestructiveMigration().build();
+        ).build();
     }
 
     @Provides

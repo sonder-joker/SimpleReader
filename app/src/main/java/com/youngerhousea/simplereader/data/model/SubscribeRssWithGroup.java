@@ -1,6 +1,7 @@
 package com.youngerhousea.simplereader.data.model;
 
 import androidx.room.Embedded;
+import androidx.room.Entity;
 import androidx.room.Relation;
 
 import java.util.List;
@@ -9,8 +10,9 @@ public class SubscribeRssWithGroup {
     @Embedded
     private Group group;
     @Relation(
-            parentColumn = "group_id",
-            entityColumn = "group_id"
+            parentColumn = "groupId",
+            entityColumn = "groupId",
+            entity = SubscribeRss.class
     )
     private List<SubscribeRss> subscribeRssList;
 

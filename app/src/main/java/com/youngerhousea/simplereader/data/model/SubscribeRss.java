@@ -6,22 +6,23 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 
 @Entity(tableName = "subscribeRssList",
         foreignKeys = @ForeignKey(
         entity = Group.class,
-        parentColumns = "group_id",
-        childColumns = "group_id"),
-indices = {@Index(value = "group_id")})
+        parentColumns = "groupId",
+        childColumns = "groupId"),
+indices = {@Index(value = "groupId")})
 public class SubscribeRss {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "subscribe_rss_id")
     private int subscribeRssId;
 
-    @ColumnInfo(name = "group_id")
     private int groupId;
 
+    @NotNull
     private String url;
 
     public int getSubscribeRssId() {
@@ -40,16 +41,16 @@ public class SubscribeRss {
         this.groupId = groupId;
     }
 
-    public String getUrl() {
+    public @NotNull String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(@NotNull String url) {
         this.url = url;
     }
 
 
-    public SubscribeRss(int groupId, String url) {
+    public SubscribeRss(int groupId, @NotNull String url) {
         this.groupId = groupId;
         this.url = url;
     }

@@ -19,21 +19,15 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class NewsViewModel extends BaseViewModel {
     private final NewsRepository newsRepository;
-    private MutableLiveData<List<SubscribeRss>> _subscribeRssList = new MutableLiveData<>();
-
-    public LiveData<List<SubscribeRss>> getSubscribeRssList() {
-        return _subscribeRssList;
-    }
+    private MutableLiveData<List<SubscribeRss>> subscribeRssList = new MutableLiveData<>();
 
     @ViewModelInject
     public NewsViewModel(@Assisted SavedStateHandle savedStateHandle, NewsRepository newsRepository) {
         this.newsRepository = newsRepository;
-//        TODO:
         setSubscribeRssList(newsRepository);
     }
 
     private void setSubscribeRssList(NewsRepository newsRepository) {
-
     }
 
 
