@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="newsViewModel"
             type="com.youngerhousea.simplereader.viewmodel.NewsViewModel" />
@@ -13,10 +14,12 @@
         android:layout_height="match_parent"
         tools:context=".fragment.NewsFragment">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello" />
+            android:id="@+id/news_recycle_view">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </FrameLayout>
 </layout>

@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.library.baseAdapters.BR;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.youngerhousea.simplereader.R;
+import com.youngerhousea.simplereader.adapter.NewsRecycleViewAdapter;
 import com.youngerhousea.simplereader.base.BaseFragment;
 import com.youngerhousea.simplereader.databinding.FragmentNewsBinding;
 import com.youngerhousea.simplereader.viewmodel.NewsViewModel;
@@ -18,6 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewModel> {
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter<NewsRecycleViewAdapter.NewsViewHolder> madapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     public int getBindingVariable() {
@@ -33,7 +39,13 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewMode
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        recyclerView = viewDataBinding.newsRecycleView;
 
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        madapter = new NewsRecycleViewAdapter();
+        recyclerView.setAdapter(madapter);
         return viewDataBinding.getRoot();
     }
 

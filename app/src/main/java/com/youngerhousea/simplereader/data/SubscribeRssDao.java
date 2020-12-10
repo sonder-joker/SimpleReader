@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.RewriteQueriesToDropUnusedColumns;
 import androidx.room.Transaction;
 
+import com.youngerhousea.simplereader.data.model.Group;
 import com.youngerhousea.simplereader.data.model.GroupIdAndUrl;
 import com.youngerhousea.simplereader.data.model.SubscribeRss;
 import com.youngerhousea.simplereader.data.model.SubscribeRssWithGroup;
@@ -28,5 +29,8 @@ public interface SubscribeRssDao {
 
     @Insert(entity = SubscribeRss.class)
     void insertSubscribeRss(GroupIdAndUrl groupIdAndUrl);
+
+    @Insert(entity = Group.class)
+    void insertGroup(String groupName);
 }
 

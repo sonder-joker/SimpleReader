@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.BindingMethod;
@@ -30,7 +29,7 @@ import java.util.List;
                 method = "getSelectedItemPosition",
                 event = "selectedItemPositionAttrChanged"),
 })
-public class MySpinnerAdapter {
+public class TheSpinnerAdapter {
     @BindingAdapter("spinnerEntries")
     public static void setSpinnerEntries(@NotNull Spinner spinner, List<?> entries) {
         ArrayAdapter<?> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, entries == null ? new ArrayList<>() : entries);
@@ -51,7 +50,7 @@ public class MySpinnerAdapter {
     }
 
     @BindingAdapter({"selectedItemPosition", "adapter"})
-    public static void setSelectedItemPosition(@NotNull Spinner view, int position, SpinnerAdapter adapter) {
+    public static void setSelectedItemPosition(@NotNull Spinner view, int position, android.widget.SpinnerAdapter adapter) {
         if (adapter != view.getAdapter()) {
             view.setAdapter(adapter);
             view.setSelection(position);
@@ -61,7 +60,7 @@ public class MySpinnerAdapter {
     }
 
     @BindingAdapter({"selection", "adapter"})
-    public static void setSelection(Spinner view, int position, SpinnerAdapter adapter) {
+    public static void setSelection(Spinner view, int position, android.widget.SpinnerAdapter adapter) {
         setSelectedItemPosition(view, position, adapter);
     }
 
