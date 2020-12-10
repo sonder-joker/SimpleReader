@@ -6,19 +6,22 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.youngerhousea.simplereader.fragment.NewsFragment"
-        android:label="NewsFragment" >
+        android:label="News">
         <action
             android:id="@+id/action_newsFragment_to_rssAddFragment"
             app:destination="@id/rssAddFragment" />
+        <action
+            android:id="@+id/action_newsFragment_to_meFragment"
+            app:destination="@id/meFragment" />
     </fragment>
     <fragment
         android:id="@+id/meFragment"
         android:name="com.youngerhousea.simplereader.fragment.MeFragment"
-        android:label="MeFragment" />
+        android:label="Me" />
     <fragment
         android:id="@+id/rssAddFragment"
         android:name="com.youngerhousea.simplereader.fragment.RssAddFragment"
-        android:label="RssAddFragment" >
+        android:label="Add Rss">
         <action
             android:id="@+id/action_rssAddFragment_to_newsFragment"
             app:destination="@id/newsFragment" />

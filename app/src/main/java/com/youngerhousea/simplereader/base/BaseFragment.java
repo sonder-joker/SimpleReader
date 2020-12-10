@@ -12,6 +12,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.youngerhousea.simplereader.viewmodel.BaseViewModel;
 
@@ -22,6 +25,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
 
     protected V viewModel;
 
+    protected NavController navController;
     /**
      * Override for set binding variable
      *
@@ -39,11 +43,14 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        setHasOptionsMenu(true);
+
         @SuppressWarnings("unchecked")
         Class<V> VType = (Class<V>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[1];
         viewModel = new ViewModelProvider(this).get(VType);
         viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+
         return viewDataBinding.getRoot();
     }
 
@@ -52,6 +59,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
         super.onViewCreated(view, savedInstanceState);
         viewDataBinding.setVariable(getBindingVariable(), viewModel);
         viewDataBinding.setLifecycleOwner(this);
+        navController = Navigation.findNavController(view);
     }
 
     public T getViewDataBinding() {

@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">SimpleReader</string>
     <string name="news">News</string>
-    <string name="me">me</string>
+    <string name="me">Me</string>
     <string name="add_rss">Add rss</string>
     <string name="url_you_want_to_add">Url you want to add</string>
     <string name="confirm_button">Confirm</string>
     <string name="url">Url</string>
     <string name="group">Group</string>
+    <string name="dialog_add_group">Add group</string>
+    <string name="dialog_put_in_title">put in title</string>
 </resources>

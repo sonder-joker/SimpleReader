@@ -1,6 +1,7 @@
 package com.youngerhousea.simplereader;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -9,8 +10,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.view.Menu;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.youngerhousea.simplereader.databinding.ActivityMainBinding;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -19,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
     private AppBarConfiguration bottomBarConfiguration;
     private AppBarConfiguration drawerConfiguration;
 
@@ -49,4 +52,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, drawerConfiguration) || NavigationUI.navigateUp(navController, bottomBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }

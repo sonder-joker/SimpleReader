@@ -35,4 +35,7 @@ public class RssAddViewModel extends BaseViewModel {
     public void showSnackBar(){
         snackBarIsExist.setValue(new Event<>("You Don't change it"));
     }
+
+    public void insertGroup() {
+    }
 }
