@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph.xml"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph.xml"
     app:startDestination="@id/newsFragment">
 
     <fragment
@@ -25,5 +26,20 @@
         <action
             android:id="@+id/action_rssAddFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_rssAddFragment_to_addGroupDialogFragment"
+            app:destination="@id/addGroupDialogFragment" />
     </fragment>
+
+    <dialog
+        android:id="@+id/addGroupDialogFragment"
+        android:name="com.youngerhousea.simplereader.fragment.RssAddDialogFragment"
+        android:label="AddGroupDialogFragment">
+        <argument
+            android:name="arg"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_addGroupDialogFragment_to_rssAddFragment"
+            app:destination="@id/rssAddFragment" />
+    </dialog>
 </navigation>

@@ -5,9 +5,13 @@
         android:id="@+id/action_add_group"
         android:icon="@drawable/ic_add_group"
         app:showAsAction="ifRoom"
-        android:title="1" />
+        android:title="@string/dialog_rss_add_add_group" />
 
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/action_export"
         app:showAsAction="never"
         android:title="2" />
+
+    <item android:id="@+id/action_import"
+        app:showAsAction="never"
+        android:title="3" />
 </menu>
