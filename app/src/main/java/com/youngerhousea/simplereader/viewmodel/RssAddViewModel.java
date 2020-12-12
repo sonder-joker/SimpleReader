@@ -17,7 +17,8 @@ public class RssAddViewModel extends BaseViewModel {
     public MutableLiveData<List<String>> groups;
     public MutableLiveData<String> urlToAdd = new MutableLiveData<>("");
     public MutableLiveData<Integer> groupId = new MutableLiveData<>(-1);
-    public MutableLiveData<Event<String>> snackBarIsExist = new MutableLiveData<>();
+    public MutableLiveData<Event<String>> snackBarIsExist = new MutableLiveData<>(new Event<>("You Don't change it"));
+    public MutableLiveData<String> groupToAdd = new MutableLiveData<>("");
 
     @ViewModelInject
     public RssAddViewModel(@Assisted SavedStateHandle savedStateHandle, @NotNull RssAddRepository repository) {
@@ -29,13 +30,11 @@ public class RssAddViewModel extends BaseViewModel {
     }
 
     public void insertSubscribeRss() {
-        repository.insertSubscribeRss(groupId.getValue(), urlToAdd.getValue());
-    }
-
-    public void showSnackBar(){
-        snackBarIsExist.setValue(new Event<>("You Don't change it"));
+        repository.insertSubscribeRss(groupId.getValue(), groupToAdd.getValue());
     }
 
     public void insertGroup() {
+        repository.insertGroup(groupToAdd.getValue());
     }
+
 }

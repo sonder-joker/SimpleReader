@@ -7,11 +7,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.youngerhousea.simplereader.viewmodel.BaseViewModel;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.Objects;
 
 public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseViewModel> extends AppCompatActivity {
 
@@ -36,9 +36,9 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Class VType = (Class) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[1];
-        viewModel = (V) new ViewModelProvider(this).get(VType);
+        @SuppressWarnings("unchecked")
+        Class<V> VType = (Class<V>) ((ParameterizedType) Objects.requireNonNull(getClass()
+                .getGenericSuperclass())).getActualTypeArguments()[1];
         performDataBinding();
     }
 

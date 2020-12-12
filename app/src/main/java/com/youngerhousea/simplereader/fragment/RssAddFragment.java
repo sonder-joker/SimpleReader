@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,6 +18,7 @@ import com.youngerhousea.simplereader.BR;
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.base.BaseFragment;
 import com.youngerhousea.simplereader.databinding.FragmentRssAddBinding;
+import com.youngerhousea.simplereader.utils.Event;
 import com.youngerhousea.simplereader.viewmodel.RssAddViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -35,9 +37,9 @@ public class RssAddFragment extends BaseFragment<FragmentRssAddBinding, RssAddVi
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         viewModel.snackBarIsExist.observe(getViewLifecycleOwner(),
                 event -> {
                     final String data = event.getContentIfNotHandled();
@@ -48,20 +50,24 @@ public class RssAddFragment extends BaseFragment<FragmentRssAddBinding, RssAddVi
 
         viewDataBinding.button.setOnClickListener(v -> {
             if (viewModel.groupId.getValue() == -1)
-                viewModel.showSnackBar();
+                viewModel.snackBarIsExist.setValue("You Don't change it");
             else
                 viewModel.insertSubscribeRss();
         });
 
-        return viewDataBinding.getRoot();
-    }
+        viewModel.snackBarIsExist.observe(getViewLifecycleOwner(), new Observer<Event<String>>() {
+            @Override
+            public void onChanged(Event<String> stringEvent) {
+                String string = stringEvent.getContentIfNotHandled();
+                if(string == null)
+                    return;
+                else
+                    Snackbar.make(view, R.id.sn)
+            }
+        });
 
-    @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.menu.menu_layout_rss_add).build();
         viewDataBinding.toolbar.inflateMenu(R.menu.menu_layout_rss_add);
-
         viewDataBinding.toolbar.setOnMenuItemClickListener(item -> {
             int itemId = item.getItemId();
 

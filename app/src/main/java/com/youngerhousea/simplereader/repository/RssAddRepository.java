@@ -8,6 +8,7 @@ import com.youngerhousea.simplereader.data.SubscribeRssDao;
 import com.youngerhousea.simplereader.data.model.GroupIdAndUrl;
 import com.youngerhousea.simplereader.data.model.SubscribeRssWithGroup;
 
+import org.intellij.lang.annotations.Flow;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -72,6 +73,19 @@ public class RssAddRepository {
                         subScribeRssDao::insertSubscribeRss,
                         throwable -> Log.w(TAG, "insertSubscribeRss: Insert into Database error", throwable),
                         () -> Log.d(TAG, "insertSubscribeRss: Insert into Database Complete"))
+                .dispose();
+    }
+
+    public void insertGroup(String value) {
+        if(value == null) {
+            return;
+        }
+        Flowable.just(value)
+                .subscribeOn(Schedulers.io())
+                .subscribe(
+                        subScribeRssDao::insertGroup,
+                        throwable -> Log.w(TAG, "insertGroup: Insert into Database error", throwable),
+                        () -> Log.d(TAG, "insertGroup: Insert into Database Complete"))
                 .dispose();
     }
 }

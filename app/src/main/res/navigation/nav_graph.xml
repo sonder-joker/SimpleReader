@@ -35,9 +35,6 @@
         android:id="@+id/addGroupDialogFragment"
         android:name="com.youngerhousea.simplereader.fragment.RssAddDialogFragment"
         android:label="AddGroupDialogFragment">
-        <argument
-            android:name="arg"
-            android:defaultValue="@null" />
         <action
             android:id="@+id/action_addGroupDialogFragment_to_rssAddFragment"
             app:destination="@id/rssAddFragment" />

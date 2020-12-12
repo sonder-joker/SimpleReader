@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.youngerhousea.simplereader.viewmodel.BaseViewModel;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.Objects;
 
 public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseViewModel> extends Fragment {
     protected T viewDataBinding;
@@ -46,9 +47,9 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
         setHasOptionsMenu(true);
 
         @SuppressWarnings("unchecked")
-        Class<V> VType = (Class<V>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[1];
-        viewModel = new ViewModelProvider(this).get(VType);
+        Class<V> VType = (Class<V>) ((ParameterizedType) Objects.requireNonNull(getClass()
+                .getGenericSuperclass())).getActualTypeArguments()[1];
+        viewModel = new ViewModelProvider(requireActivity()).get(VType);
         viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
 
         return viewDataBinding.getRoot();
