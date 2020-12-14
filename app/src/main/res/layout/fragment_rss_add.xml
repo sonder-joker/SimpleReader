@@ -17,16 +17,8 @@
         tools:context=".fragment.RssAddFragment">
 
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_collapseMode="pin"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/fragment_rss_add_ll_top"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:orientation="vertical"
@@ -34,7 +26,7 @@
             android:paddingEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:layout_width="match_parent"
@@ -44,7 +36,7 @@
                 android:text="@string/fragment_rss_add_group" />
 
             <Spinner
-                android:id="@+id/rss_group"
+                android:id="@+id/fragment_rss_add_spn_rss_group"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -59,7 +51,7 @@
                 android:text="@string/fragment_rss_add_url" />
 
             <EditText
-                android:id="@+id/url_to_add"
+                android:id="@+id/fragment_rss_add_et_url_to_add"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -76,9 +68,9 @@
             android:layout_marginStart="248dp"
             android:layout_marginTop="56dp"
             android:layout_weight="1"
-            android:text="@string/fragment_rss_add_confirm_button"
+            android:text="@string/fragment_rss_add_btn_confirm"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_rss_add_ll_top" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

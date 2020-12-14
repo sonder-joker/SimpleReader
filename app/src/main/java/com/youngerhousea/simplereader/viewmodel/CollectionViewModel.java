@@ -6,8 +6,8 @@ import androidx.lifecycle.SavedStateHandle;
 
 import com.youngerhousea.simplereader.base.BaseViewModel;
 
-public class MeViewModel extends BaseViewModel {
+public class CollectionViewModel extends BaseViewModel {
     @ViewModelInject
-    public MeViewModel(@Assisted SavedStateHandle savedStateHandle) {
+    public CollectionViewModel(@Assisted SavedStateHandle savedStateHandle) {
     }
 }

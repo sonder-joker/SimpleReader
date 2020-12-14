@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 
+import com.youngerhousea.simplereader.base.BaseViewModel;
 import com.youngerhousea.simplereader.data.model.SubscribeRssWithGroup;
 import com.youngerhousea.simplereader.repository.NewsRepository;
 

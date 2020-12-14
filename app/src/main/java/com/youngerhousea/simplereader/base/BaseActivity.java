@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
-import com.youngerhousea.simplereader.viewmodel.BaseViewModel;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.Objects;
 

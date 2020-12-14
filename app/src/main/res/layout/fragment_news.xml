@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="newsViewModel"
             type="com.youngerhousea.simplereader.viewmodel.NewsViewModel" />
@@ -15,7 +14,6 @@
         android:layout_height="match_parent"
         tools:context=".fragment.NewsFragment">
 
-
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
@@ -24,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar_layout"
+                android:id="@+id/fragment_news_collapsing_toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentScrim="?attr/colorPrimary"
@@ -32,7 +30,7 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
+                    android:id="@+id/fragment_news_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin" />

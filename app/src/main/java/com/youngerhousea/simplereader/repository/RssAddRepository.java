@@ -8,7 +8,6 @@ import com.youngerhousea.simplereader.data.SubscribeRssDao;
 import com.youngerhousea.simplereader.data.model.GroupIdAndUrl;
 import com.youngerhousea.simplereader.data.model.SubscribeRssWithGroup;
 
-import org.intellij.lang.annotations.Flow;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -16,30 +15,26 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RssAddRepository {
-    private final SubscribeRssDao subScribeRssDao;
-    private static final String TAG = "RssAddRepository";
+
+    private static final String TAG = RssAddRepository.class.getName();
+
+    private final SubscribeRssDao mSubScribeRssDao;
 
     @Inject
-    public RssAddRepository(SubscribeRssDao subScribeRssDao) {
-        this.subScribeRssDao = subScribeRssDao;
-//        Flowable.just("Default")
-//                .observeOn(Schedulers.io())
-//                .subscribe(
-//                        subScribeRssDao::insertGroup,
-//                        throwable -> Log.w(TAG, "RssAddRepository: can't init group", throwable),
-//                        () -> Log.d(TAG, "RssAddRepository: init group")
-//                )
-//                .dispose();
+    public RssAddRepository(SubscribeRssDao mSubScribeRssDao) {
+        this.mSubScribeRssDao = mSubScribeRssDao;
     }
 
     public MutableLiveData<List<SubscribeRssWithGroup>> getSubscribeRssWithGroupList() {
         final MutableLiveData<List<SubscribeRssWithGroup>> subscribeRssWithGroupList = new MutableLiveData<>();
-        subScribeRssDao.getAllSubscribeRssWithGroup()
+        mSubScribeRssDao.getAllSubscribeRssWithGroup()
                 .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         subscribeRssWithGroupList::setValue,
                         throwable -> Log.w(TAG, "getSubscribeRssWithGroupList: can't get all subscribeRss With Group List", throwable),
@@ -51,8 +46,9 @@ public class RssAddRepository {
 
     public @NotNull MutableLiveData<List<String>> getAllGroup() {
         final MutableLiveData<List<String>> groups = new MutableLiveData<>();
-        subScribeRssDao.getAllGroup()
-                .subscribeOn(Schedulers.io())
+        mSubScribeRssDao.getAllGroup()
+                .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         value -> {
                             if (value != null)
@@ -68,9 +64,10 @@ public class RssAddRepository {
 
     public void insertSubscribeRss(int groupId, String url) {
         Flowable.just(new GroupIdAndUrl(groupId, url))
-                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        subScribeRssDao::insertSubscribeRss,
+                        mSubScribeRssDao::insertSubscribeRss,
                         throwable -> Log.w(TAG, "insertSubscribeRss: Insert into Database error", throwable),
                         () -> Log.d(TAG, "insertSubscribeRss: Insert into Database Complete"))
                 .dispose();
@@ -81,11 +78,16 @@ public class RssAddRepository {
             return;
         }
         Flowable.just(value)
-                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        subScribeRssDao::insertGroup,
+                        mSubScribeRssDao::insertGroup,
                         throwable -> Log.w(TAG, "insertGroup: Insert into Database error", throwable),
                         () -> Log.d(TAG, "insertGroup: Insert into Database Complete"))
                 .dispose();
+    }
+
+    public void searchKeyWord(String keyword) {
+        
     }
 }

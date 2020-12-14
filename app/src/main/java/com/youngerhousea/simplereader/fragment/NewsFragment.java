@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -27,12 +25,11 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewModel> {
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter<NewsRecycleViewAdapter.NewsViewHolder> madapter;
+    private RecyclerView.Adapter<NewsRecycleViewAdapter.NewsViewHolder> adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
-    public int getBindingVariable() {
+    public int getBindingViewModel() {
         return BR.newsViewModel;
     }
 
@@ -42,33 +39,17 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewMode
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-
-        recyclerView = viewDataBinding.newsRecycleView;
-
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-
-        madapter = new NewsRecycleViewAdapter();
-        recyclerView.setAdapter(madapter);
-        return viewDataBinding.getRoot();
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        layoutManager = new LinearLayoutManager(getContext());
+        dataBinding.newsRecycleView.setLayoutManager(layoutManager);
+
+        adapter = new NewsRecycleViewAdapter();
+        dataBinding.newsRecycleView.setAdapter(adapter);
+
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupWithNavController(viewDataBinding.collapsingToolbarLayout , viewDataBinding.toolbar, navController, appBarConfiguration);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        ;
-        super.onCreateOptionsMenu(menu, inflater);
-
+        NavigationUI.setupWithNavController(dataBinding.fragmentNewsCollapsingToolbarLayout , dataBinding.fragmentNewsToolbar, navController, appBarConfiguration);
     }
 
 }

@@ -13,12 +13,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 
 public class NewsRepository {
+
     private final SubscribeRssDao subScribeRssDao;
 
     @Inject
@@ -30,6 +32,7 @@ public class NewsRepository {
         final MutableLiveData<List<SubscribeRssWithGroup>> data = new MutableLiveData<>();
         subScribeRssDao.getAllSubscribeRssWithGroup()
                 .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscribeRssWithGroups -> {
                     if (subscribeRssWithGroups != null) {
                         data.setValue(subscribeRssWithGroups);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/newsFragment"
+        android:id="@+id/fragment_news"
         android:title="@string/activity_main_bottom_first" />
     <item
-        android:id="@+id/meFragment"
+        android:id="@+id/fragment_me"
         android:title="@string/activity_main_bottom_second" />
 </menu>

@@ -2,6 +2,7 @@ package com.youngerhousea.simplereader;
 
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -30,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.setLifecycleOwner(this);
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nav_host);
         NavController navController = navHostFragment.getNavController();
 
-        bottomBarConfiguration = new AppBarConfiguration.Builder(R.id.newsFragment, R.id.meFragment).build();
+        bottomBarConfiguration = new AppBarConfiguration.Builder(R.id.fragment_news, R.id.fragment_me).build();
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
@@ -42,11 +43,19 @@ public class MainActivity extends AppCompatActivity {
                         .setOpenableLayout(drawerLayout)
                         .build();
         NavigationUI.setupWithNavController(binding.drawerNav, navController);
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            final int id = destination.getId();
+            if(id == R.id.fragment_news || id == R.id.fragment_me) {
+                binding.bottomNav.setVisibility(View.VISIBLE);
+            } else
+                binding.bottomNav.setVisibility(View.GONE);
+        });
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this, R.id.fragment_nav_host);
         return NavigationUI.navigateUp(navController, drawerConfiguration) || NavigationUI.navigateUp(navController, bottomBarConfiguration)
                 || super.onSupportNavigateUp();
     }

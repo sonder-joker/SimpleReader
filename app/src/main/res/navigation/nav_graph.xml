@@ -2,41 +2,46 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/newsFragment">
+    app:startDestination="@id/fragment_news">
 
     <fragment
-        android:id="@+id/newsFragment"
+        android:id="@+id/fragment_news"
         android:name="com.youngerhousea.simplereader.fragment.NewsFragment"
         android:label="News">
         <action
-            android:id="@+id/action_newsFragment_to_rssAddFragment"
-            app:destination="@id/rssAddFragment" />
-        <action
-            android:id="@+id/action_newsFragment_to_meFragment"
-            app:destination="@id/meFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/meFragment"
-        android:name="com.youngerhousea.simplereader.fragment.MeFragment"
-        android:label="Me" />
-    <fragment
-        android:id="@+id/rssAddFragment"
-        android:name="com.youngerhousea.simplereader.fragment.RssAddFragment"
-        android:label="Add Rss">
-        <action
-            android:id="@+id/action_rssAddFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
-        <action
-            android:id="@+id/action_rssAddFragment_to_addGroupDialogFragment"
-            app:destination="@id/addGroupDialogFragment" />
+            android:id="@+id/action_fragment_news_to_fragment_collection"
+            app:destination="@id/fragment_collection" />
     </fragment>
 
-    <dialog
-        android:id="@+id/addGroupDialogFragment"
-        android:name="com.youngerhousea.simplereader.fragment.RssAddDialogFragment"
-        android:label="AddGroupDialogFragment">
+    <fragment
+        android:id="@+id/fragment_me"
+        android:name="com.youngerhousea.simplereader.fragment.MeFragment"
+        android:label="Me" />
+
+    <fragment
+        android:id="@+id/fragment_collection"
+        android:name="com.youngerhousea.simplereader.fragment.CollectionFragment"
+        android:label="CollectionFragment" >
         <action
-            android:id="@+id/action_addGroupDialogFragment_to_rssAddFragment"
-            app:destination="@id/rssAddFragment" />
+            android:id="@+id/action_fragment_collection_to_dialog_fragment_add_group"
+            app:destination="@id/dialog_fragment_add_group" />
+        <action
+            android:id="@+id/action_fragment_collection_to_fragment_rss_add"
+            app:destination="@id/fragment_rss_add" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_rss_add"
+        android:name="com.youngerhousea.simplereader.fragment.RssAddFragment"
+        android:label="Add Rss">
+    </fragment>
+
+
+    <dialog
+        android:id="@+id/dialog_fragment_add_group"
+        android:name="com.youngerhousea.simplereader.fragment.AddGroupDialogFragment"
+        android:label="AddGroupDialogFragment">
     </dialog>
+
+
 </navigation>
