@@ -2,6 +2,7 @@ package com.youngerhousea.simplereader.viewmodel;
 
 import androidx.hilt.Assisted;
 import androidx.hilt.lifecycle.ViewModelInject;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class RssAddViewModel extends BaseViewModel {
     private final RssAddRepository repository;
-    public MutableLiveData<List<String>> groups;
+    public LiveData<List<String>> groups;
     public MutableLiveData<String> urlToAdd = new MutableLiveData<>();
     public MutableLiveData<Integer> groupId = new MutableLiveData<>();
 

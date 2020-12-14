@@ -1,5 +1,6 @@
 package com.youngerhousea.simplereader.repository;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.youngerhousea.simplereader.data.SubscribeRssDao;
@@ -28,20 +29,8 @@ public class NewsRepository {
         this.subScribeRssDao = subScribeRssDao;
     }
 
-    public @NotNull MutableLiveData<List<SubscribeRssWithGroup>> getAllSubscribeRssWithGroup() {
-        final MutableLiveData<List<SubscribeRssWithGroup>> data = new MutableLiveData<>();
-        subScribeRssDao.getAllSubscribeRssWithGroup()
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscribeRssWithGroups -> {
-                    if (subscribeRssWithGroups != null) {
-                        data.setValue(subscribeRssWithGroups);
-                    } else {
-                        data.setValue(new ArrayList<>());
-                    }
-                })
-                .dispose();
-        return data;
+    public @NotNull LiveData<List<SubscribeRssWithGroup>> getAllSubscribeRssWithGroup() {
+        return subScribeRssDao.getAllSubscribeRssWithGroup();
     }
 
 }

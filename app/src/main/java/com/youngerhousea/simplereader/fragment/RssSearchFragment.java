@@ -20,6 +20,4 @@ public class RssSearchFragment extends BaseFragment<FragmentRssSearchBinding, Rs
     public int getLayoutId() {
         return R.layout.fragment_rss_search;
     }
-
-
 }

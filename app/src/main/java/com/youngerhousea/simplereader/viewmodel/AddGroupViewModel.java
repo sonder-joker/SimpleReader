@@ -18,5 +18,6 @@ public class AddGroupViewModel extends BaseViewModel {
 
     public void insertGroup() {
         repository.insertGroup(groupToAdd.getValue());
+        groupToAdd.setValue("");
     }
 }

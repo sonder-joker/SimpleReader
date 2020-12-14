@@ -1,14 +1,14 @@
 package com.youngerhousea.simplereader.data.model;
 
 public class GroupIdAndUrl {
-    private int groupId;
+    private Integer groupId;
     private String url;
 
-    public int getGroupId() {
+    public Integer getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 
@@ -20,7 +20,7 @@ public class GroupIdAndUrl {
         this.url = url;
     }
 
-    public GroupIdAndUrl(int groupId, String url) {
+    public GroupIdAndUrl(Integer groupId, String url) {
         this.groupId = groupId;
         this.url = url;
     }

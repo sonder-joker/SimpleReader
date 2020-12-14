@@ -8,7 +8,4 @@ import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 @HiltAndroidApp
 public class App extends Application {
-    private void setRxJavaErrorHandler() {
-        RxJavaPlugins.setErrorHandler(Throwable::printStackTrace);
-    }
 }

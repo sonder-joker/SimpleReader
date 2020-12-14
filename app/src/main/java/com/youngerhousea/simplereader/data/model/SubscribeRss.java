@@ -18,26 +18,26 @@ indices = {@Index(value = "groupId")})
 public class SubscribeRss {
 
     @PrimaryKey(autoGenerate = true)
-    private int subscribeRssId;
+    private Integer subscribeRssId;
 
-    private int groupId;
+    private Integer groupId;
 
     @NotNull
     private String url;
 
-    public int getSubscribeRssId() {
+    public Integer getSubscribeRssId() {
         return subscribeRssId;
     }
 
-    public void setSubscribeRssId(int subscribeRssId) {
+    public void setSubscribeRssId(Integer subscribeRssId) {
         this.subscribeRssId = subscribeRssId;
     }
 
-    public int getGroupId() {
+    public Integer getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 
@@ -50,7 +50,7 @@ public class SubscribeRss {
     }
 
 
-    public SubscribeRss(int groupId, @NotNull String url) {
+    public SubscribeRss(Integer groupId, @NotNull String url) {
         this.groupId = groupId;
         this.url = url;
     }

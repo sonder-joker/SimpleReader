@@ -14,10 +14,8 @@ import java.util.List;
 
 public class NewsViewModel extends BaseViewModel {
     private final NewsRepository newsRepository;
-    private MutableLiveData<List<SubscribeRssWithGroup>> subscribeRssList;
-    public LiveData<List<SubscribeRssWithGroup>> getSubscribeRssList() {
-        return subscribeRssList;
-    }
+    public LiveData<List<SubscribeRssWithGroup>> subscribeRssList;
+
 
     @ViewModelInject
     public NewsViewModel(@Assisted SavedStateHandle savedStateHandle, NewsRepository newsRepository) {

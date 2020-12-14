@@ -2,6 +2,14 @@ package com.youngerhousea.simplereader.base;
 
 import androidx.lifecycle.ViewModel;
 
-public abstract class BaseViewModel extends ViewModel {
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
+public abstract class BaseViewModel extends ViewModel {
+    protected CompositeDisposable diposable = new CompositeDisposable();
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        diposable.clear();
+    }
 }

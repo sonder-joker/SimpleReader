@@ -2,92 +2,60 @@ package com.youngerhousea.simplereader.repository;
 
 import android.util.Log;
 
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
 
 import com.youngerhousea.simplereader.data.SubscribeRssDao;
+import com.youngerhousea.simplereader.data.model.Group;
 import com.youngerhousea.simplereader.data.model.GroupIdAndUrl;
 import com.youngerhousea.simplereader.data.model.SubscribeRssWithGroup;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RssAddRepository {
-
     private static final String TAG = RssAddRepository.class.getName();
 
-    private final SubscribeRssDao mSubScribeRssDao;
+    private final SubscribeRssDao subScribeRssDao;
 
     @Inject
-    public RssAddRepository(SubscribeRssDao mSubScribeRssDao) {
-        this.mSubScribeRssDao = mSubScribeRssDao;
+    public RssAddRepository(SubscribeRssDao subScribeRssDao) {
+        this.subScribeRssDao = subScribeRssDao;
     }
 
-    public MutableLiveData<List<SubscribeRssWithGroup>> getSubscribeRssWithGroupList() {
-        final MutableLiveData<List<SubscribeRssWithGroup>> subscribeRssWithGroupList = new MutableLiveData<>();
-        mSubScribeRssDao.getAllSubscribeRssWithGroup()
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        subscribeRssWithGroupList::setValue,
-                        throwable -> Log.w(TAG, "getSubscribeRssWithGroupList: can't get all subscribeRss With Group List", throwable),
-                        () -> Log.d(TAG, "getSubscribeRssWithGroupList: get all subscribeRss With Group List"))
-                .dispose();
-
-        return subscribeRssWithGroupList;
+    public LiveData<List<SubscribeRssWithGroup>> getSubscribeRssWithGroupList() {
+        return subScribeRssDao.getAllSubscribeRssWithGroup();
     }
 
-    public @NotNull MutableLiveData<List<String>> getAllGroup() {
-        final MutableLiveData<List<String>> groups = new MutableLiveData<>();
-        mSubScribeRssDao.getAllGroup()
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        value -> {
-                            if (value != null)
-                                groups.setValue(value);
-                            else
-                                groups.setValue(new ArrayList<>());
-                        },
-                        throwable -> Log.w(TAG, "getAllGroup: can't get all group", throwable),
-                        () -> Log.d(TAG, "getAllGroup: get all group")
-                ).dispose();
-        return groups;
+    public @NotNull LiveData<List<String>> getAllGroup() {
+        return subScribeRssDao.getAllGroup();
     }
 
-    public void insertSubscribeRss(int groupId, String url) {
-        Flowable.just(new GroupIdAndUrl(groupId, url))
+    public void insertSubscribeRss(Integer groupId, String url) {
+        subScribeRssDao
+                .insertSubscribeRss(new GroupIdAndUrl(groupId, url))
                 .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        mSubScribeRssDao::insertSubscribeRss,
-                        throwable -> Log.w(TAG, "insertSubscribeRss: Insert into Database error", throwable),
-                        () -> Log.d(TAG, "insertSubscribeRss: Insert into Database Complete"))
+                .subscribeOn(Schedulers.io())
+                .subscribe(() -> Log.d(TAG, "insertSubscribeRss: insert subscribe rss")
+                        , throwable -> Log.w(TAG, "insertSubscribeRss: insert wrong", throwable))
                 .dispose();
     }
 
-    public void insertGroup(String value) {
-        if(value == null) {
-            return;
-        }
-        Flowable.just(value)
+    public void insertGroup(String groupName) {
+        subScribeRssDao
+                .insertGroup(new Group(groupName))
                 .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        mSubScribeRssDao::insertGroup,
-                        throwable -> Log.w(TAG, "insertGroup: Insert into Database error", throwable),
-                        () -> Log.d(TAG, "insertGroup: Insert into Database Complete"))
+                .subscribeOn(Schedulers.io())
+                .subscribe(() -> Log.d(TAG, "insertGroup: insert group success")
+                        , throwable -> Log.e(TAG, "insertGroup: insert wrong", throwable))
                 .dispose();
     }
 
     public void searchKeyWord(String keyword) {
-        
+
     }
 }

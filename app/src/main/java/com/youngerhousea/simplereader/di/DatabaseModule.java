@@ -3,7 +3,10 @@ package com.youngerhousea.simplereader.di;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.youngerhousea.simplereader.data.AppDatabase;
 import com.youngerhousea.simplereader.data.SubscribeRssDao;
@@ -20,20 +23,31 @@ import dagger.hilt.components.SingletonComponent;
 @Module
 @InstallIn(SingletonComponent.class)
 public class DatabaseModule {
+    private static final String name = "app.db";
+
+    private final RoomDatabase.Callback callback = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+
+        }
+    };
 
     @Provides
     @Singleton
     AppDatabase provideAppDatabase(@ApplicationContext Context context) {
+
         return Room.databaseBuilder(
                 context,
                 AppDatabase.class,
-                "app.db"
-        ).build();
+                name
+        ).fallbackToDestructiveMigration().addCallback(callback).build();
     }
 
     @Provides
     @Singleton
-    SubscribeRssDao provideSubscribeDatabase(AppDatabase appDatabase){
+    SubscribeRssDao provideSubscribeDatabase(AppDatabase appDatabase) {
         return appDatabase.getSubscribeRssList();
     }
+
 }

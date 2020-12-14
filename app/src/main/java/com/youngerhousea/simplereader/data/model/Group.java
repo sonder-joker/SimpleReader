@@ -7,15 +7,15 @@ import androidx.room.PrimaryKey;
 public class Group {
 
     @PrimaryKey(autoGenerate = true)
-    private int groupId;
+    private Integer groupId;
 
     private String groupName;
 
-    public int getGroupId() {
+    public Integer getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 
