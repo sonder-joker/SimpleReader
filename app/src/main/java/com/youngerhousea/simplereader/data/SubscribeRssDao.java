@@ -9,7 +9,7 @@ import androidx.room.Transaction;
 import com.youngerhousea.simplereader.data.model.Group;
 import com.youngerhousea.simplereader.data.model.GroupIdAndUrl;
 import com.youngerhousea.simplereader.data.model.SubscribeRss;
-import com.youngerhousea.simplereader.data.model.SubscribeRssWithGroup;
+import com.youngerhousea.simplereader.data.model.GroupWithSubscribeRss;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public interface SubscribeRssDao {
 
     @Transaction
     @Query("SELECT * FROM groupList")
-    LiveData<List<SubscribeRssWithGroup>> getAllSubscribeRssWithGroup();
+    LiveData<List<GroupWithSubscribeRss>> getAllSubscribeRssWithGroup();
 
     @Query("SELECT DISTINCT groupName FROM groupList")
     LiveData<List<String>> getAllGroup();

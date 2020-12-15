@@ -16,6 +16,11 @@
         android:layout_height="match_parent"
         tools:context=".fragment.RssAddFragment">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_rss_edit_rv_group_url"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

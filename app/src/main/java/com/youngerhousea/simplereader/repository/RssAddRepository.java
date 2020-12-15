@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 import com.youngerhousea.simplereader.data.SubscribeRssDao;
 import com.youngerhousea.simplereader.data.model.Group;
 import com.youngerhousea.simplereader.data.model.GroupIdAndUrl;
-import com.youngerhousea.simplereader.data.model.SubscribeRssWithGroup;
+import com.youngerhousea.simplereader.data.model.GroupWithSubscribeRss;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RssAddRepository {
@@ -27,7 +28,7 @@ public class RssAddRepository {
         this.subScribeRssDao = subScribeRssDao;
     }
 
-    public LiveData<List<SubscribeRssWithGroup>> getSubscribeRssWithGroupList() {
+    public @NotNull LiveData<List<GroupWithSubscribeRss>> getSubscribeRssWithGroupList() {
         return subScribeRssDao.getAllSubscribeRssWithGroup();
     }
 
@@ -35,24 +36,23 @@ public class RssAddRepository {
         return subScribeRssDao.getAllGroup();
     }
 
-    public void insertSubscribeRss(Integer groupId, String url) {
-        subScribeRssDao
+    public Disposable insertSubscribeRss(Integer groupId, String url) {
+        return subScribeRssDao
                 .insertSubscribeRss(new GroupIdAndUrl(groupId, url))
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .subscribe(() -> Log.d(TAG, "insertSubscribeRss: insert subscribe rss")
-                        , throwable -> Log.w(TAG, "insertSubscribeRss: insert wrong", throwable))
-                .dispose();
+                        , throwable -> Log.e(TAG, "insertSubscribeRss: insert wrong", throwable));
+
     }
 
-    public void insertGroup(String groupName) {
-        subScribeRssDao
+    public Disposable insertGroup(String groupName) {
+        return subScribeRssDao
                 .insertGroup(new Group(groupName))
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .subscribe(() -> Log.d(TAG, "insertGroup: insert group success")
-                        , throwable -> Log.e(TAG, "insertGroup: insert wrong", throwable))
-                .dispose();
+                        , throwable -> Log.e(TAG, "insertGroup: insert wrong", throwable));
     }
 
     public void searchKeyWord(String keyword) {

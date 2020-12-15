@@ -13,6 +13,7 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
             super(itemView);
         }
     }
+
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -21,6 +22,7 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
+        notifyDataSetChanged();
 
     }
 

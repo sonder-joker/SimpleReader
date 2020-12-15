@@ -26,7 +26,7 @@ public class RssAddViewModel extends BaseViewModel {
     }
 
     public void insertSubscribeRss() {
-        repository.insertSubscribeRss(groupId.getValue(), urlToAdd.getValue());
+        compositeDisposable.add(repository.insertSubscribeRss(groupId.getValue() + 1, urlToAdd.getValue()));
         urlToAdd.setValue("");
     }
 

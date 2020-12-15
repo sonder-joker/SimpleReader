@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.room.rxjava3.RxRoom;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -21,8 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class CollectionFragment extends BaseFragment<FragmentCollectionBinding, CollectionViewModel> {
-    CollectionAdapter adapter;
-    TabLayoutMediator tabLayoutMediator;
 
     @Override
     public int getBindingViewModel() {
@@ -42,10 +39,10 @@ public class CollectionFragment extends BaseFragment<FragmentCollectionBinding, 
     }
 
     private void setTabLayout() {
-        adapter = new CollectionAdapter(this);
+        CollectionAdapter adapter = new CollectionAdapter(this);
         dataBinding.fragmentCollectionViewpager.setAdapter(adapter);
 
-        tabLayoutMediator = new TabLayoutMediator(dataBinding.fragmentCollectionTabLayout, dataBinding.fragmentCollectionViewpager,
+        new TabLayoutMediator(dataBinding.fragmentCollectionTabLayout, dataBinding.fragmentCollectionViewpager,
                 (TabLayout.Tab tab, int position) -> {
                     String value;
                     switch (position) {
@@ -61,15 +58,13 @@ public class CollectionFragment extends BaseFragment<FragmentCollectionBinding, 
                     }
 
                     tab.setText(value);
-                });
-
-        tabLayoutMediator.attach();
+                }).attach();
     }
 
     private void setToolbar() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.menu.menu_layout_rss_add).build();
         dataBinding.fragmentCollectionToolbar.inflateMenu(R.menu.menu_layout_rss_add);
-        dataBinding.fragmentCollectionToolbar.setTitle(R.string.collection_title);
+        dataBinding.fragmentCollectionToolbar.setTitle(R.string.fragment_collection_title);
         dataBinding.fragmentCollectionToolbar.setOnMenuItemClickListener(item -> {
             int itemId = item.getItemId();
 

@@ -20,8 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-
-    private AppBarConfiguration bottomBarConfiguration;
+    private NavController navController;
     private AppBarConfiguration drawerConfiguration;
 
     @Override
@@ -32,32 +31,18 @@ public class MainActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nav_host);
-        NavController navController = navHostFragment.getNavController();
+        navController = navHostFragment.getNavController();
 
-        bottomBarConfiguration = new AppBarConfiguration.Builder(R.id.fragment_news, R.id.fragment_me).build();
-        NavigationUI.setupWithNavController(binding.bottomNav, navController);
-
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerConfiguration =
                 new AppBarConfiguration.Builder()
-                        .setOpenableLayout(drawerLayout)
+                        .setOpenableLayout(binding.drawerLayout)
                         .build();
         NavigationUI.setupWithNavController(binding.drawerNav, navController);
-
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            final int id = destination.getId();
-            if(id == R.id.fragment_news || id == R.id.fragment_me) {
-                binding.bottomNav.setVisibility(View.VISIBLE);
-            } else
-                binding.bottomNav.setVisibility(View.GONE);
-        });
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.fragment_nav_host);
-        return NavigationUI.navigateUp(navController, drawerConfiguration) || NavigationUI.navigateUp(navController, bottomBarConfiguration)
-                || super.onSupportNavigateUp();
+        return NavigationUI.navigateUp(navController, drawerConfiguration) || super.onSupportNavigateUp();
     }
 
 }
