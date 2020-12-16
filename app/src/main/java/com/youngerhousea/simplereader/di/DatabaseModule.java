@@ -50,7 +50,7 @@ public class DatabaseModule {
     @Provides
     @Singleton
     SubscribeRssDao provideSubscribeDatabase(AppDatabase appDatabase) {
-        return appDatabase.getSubscribeRssList();
+        return appDatabase.getSubscribeRssDao();
     }
 
 }

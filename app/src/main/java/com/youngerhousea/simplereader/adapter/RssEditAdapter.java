@@ -17,8 +17,8 @@ import java.util.List;
 public class RssEditAdapter extends RecyclerView.Adapter<RssEditAdapter.ViewHolder> {
     private List<GroupWithSubscribeRss> groupWithSubscribeRsses;
 
-    public RssEditAdapter(List<GroupWithSubscribeRss> groupWithSubscribeRsses) {
-        this.groupWithSubscribeRsses = groupWithSubscribeRsses;
+    public RssEditAdapter(List<GroupWithSubscribeRss> groupWithSubscribeRssList) {
+        this.groupWithSubscribeRsses = groupWithSubscribeRssList;
     }
 
     @NonNull

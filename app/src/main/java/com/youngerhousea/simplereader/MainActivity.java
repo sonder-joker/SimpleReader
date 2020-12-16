@@ -2,42 +2,44 @@ package com.youngerhousea.simplereader;
 
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.youngerhousea.simplereader.base.BaseActivity;
 import com.youngerhousea.simplereader.databinding.ActivityMainBinding;
+import com.youngerhousea.simplereader.viewmodel.MainViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> {
 
-    private ActivityMainBinding binding;
-    private NavController navController;
     private AppBarConfiguration drawerConfiguration;
+
+    @Override
+    public int getBindingViewModel() {
+        return BR.mainViewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        binding.setLifecycleOwner(this);
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nav_host);
-        navController = navHostFragment.getNavController();
 
         drawerConfiguration =
                 new AppBarConfiguration.Builder()
-                        .setOpenableLayout(binding.drawerLayout)
+                        .setOpenableLayout(dataBinding.drawerLayout)
                         .build();
-        NavigationUI.setupWithNavController(binding.drawerNav, navController);
+        NavigationUI.setupWithNavController(dataBinding.drawerNav, navController);
     }
 
     @Override

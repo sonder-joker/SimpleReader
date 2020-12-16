@@ -28,7 +28,7 @@ public class RssAddRepository {
         this.subScribeRssDao = subScribeRssDao;
     }
 
-    public @NotNull LiveData<List<GroupWithSubscribeRss>> getSubscribeRssWithGroupList() {
+    public LiveData<List<GroupWithSubscribeRss>> getSubscribeRssWithGroupList() {
         return subScribeRssDao.getAllSubscribeRssWithGroup();
     }
 

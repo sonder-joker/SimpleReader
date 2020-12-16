@@ -4,8 +4,11 @@ import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 
 import com.youngerhousea.simplereader.base.BaseViewModel;
+import com.youngerhousea.simplereader.data.model.GroupNameWithUrl;
 import com.youngerhousea.simplereader.data.model.GroupWithSubscribeRss;
 import com.youngerhousea.simplereader.repository.RssAddRepository;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 

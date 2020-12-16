@@ -14,13 +14,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/fragment_collection_toolbar"
+            android:id="@+id/fragment_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/menu_layout_rss_add"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/fragment_collection_tab_layout"

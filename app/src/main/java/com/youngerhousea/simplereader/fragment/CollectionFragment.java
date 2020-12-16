@@ -1,6 +1,7 @@
 package com.youngerhousea.simplereader.fragment;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class CollectionFragment extends BaseFragment<FragmentCollectionBinding, CollectionViewModel> {
+    AppBarConfiguration appBarConfiguration;
 
     @Override
     public int getBindingViewModel() {
@@ -62,26 +64,12 @@ public class CollectionFragment extends BaseFragment<FragmentCollectionBinding, 
     }
 
     private void setToolbar() {
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.menu.menu_layout_rss_add).build();
-        dataBinding.fragmentCollectionToolbar.inflateMenu(R.menu.menu_layout_rss_add);
-        dataBinding.fragmentCollectionToolbar.setTitle(R.string.fragment_collection_title);
-        dataBinding.fragmentCollectionToolbar.setOnMenuItemClickListener(item -> {
-            int itemId = item.getItemId();
-
-            if (itemId == R.id.action_add_group) {
-                navController.navigate(CollectionFragmentDirections.actionFragmentCollectionToDialogFragmentAddGroup());
-                return true;
-            } else if (itemId == R.id.action_export) {
-                //TODO:
-                return true;
-            } else if (itemId == R.id.action_import)
-                return true;
-
-            return false;
-        });
-
-        NavigationUI.setupWithNavController(dataBinding.fragmentCollectionToolbar, navController, appBarConfiguration);
+        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupWithNavController(dataBinding.fragmentToolbar, navController, appBarConfiguration);
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onOptionsItemSelected(item);
+    }
 }
