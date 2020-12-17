@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/menu_layout_rss_add"/>
+            app:menu="@menu/menu_layout_collection"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/fragment_collection_tab_layout"

@@ -12,9 +12,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
-import com.youngerhousea.simplereader.R;
+import androidx.navigation.fragment.NavHostFragment;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Objects;
@@ -53,7 +51,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
         view = dataBinding.getRoot();
         dataBinding.setVariable(getBindingViewModel(), viewModel);
         dataBinding.setLifecycleOwner(this);
-        navController = Navigation.findNavController(requireActivity(), R.id.fragment_nav_host);
+        navController = NavHostFragment.findNavController(this);
 
         return view;
     }

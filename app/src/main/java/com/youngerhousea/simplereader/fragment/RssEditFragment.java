@@ -5,7 +5,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.youngerhousea.simplereader.BR;
 import com.youngerhousea.simplereader.R;
@@ -18,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class RssEditFragment extends BaseFragment<FragmentRssEditBinding, RssEditViewModel> {
+
     @Override
     public int getBindingViewModel() {
         return BR.rssEditViewModel;
@@ -31,9 +31,8 @@ public class RssEditFragment extends BaseFragment<FragmentRssEditBinding, RssEdi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dataBinding.fragmentRssEditRvGroupUrl.setHasFixedSize(true);
-        dataBinding.fragmentRssEditRvGroupUrl.setLayoutManager(new LinearLayoutManager(getContext()));
-        dataBinding.fragmentRssEditRvGroupUrl.setLayoutManager(new LinearLayoutManager(getContext()));
-        dataBinding.fragmentRssEditRvGroupUrl.setAdapter(new RssEditAdapter(viewModel.subscribeRssWithGroups.getValue()));
+        viewModel.subscribeRssWithGroups.observe(getViewLifecycleOwner(),
+                groupWithSubscribeRssList ->
+                        dataBinding.fragmentRssEditExpendableListView.setAdapter(new RssEditAdapter(groupWithSubscribeRssList)));
     }
 }

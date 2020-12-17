@@ -16,27 +16,38 @@
     <fragment
         android:id="@+id/fragment_collection"
         android:name="com.youngerhousea.simplereader.fragment.CollectionFragment"
-        android:label="CollectionFragment" >
+        android:label="CollectionFragment">
         <action
             android:id="@+id/action_fragment_collection_to_dialog_fragment_add_group"
             app:destination="@id/dialog_fragment_add_group" />
         <action
             android:id="@+id/action_fragment_collection_to_fragment_rss_add"
             app:destination="@id/fragment_rss_add" />
+        <action
+            android:id="@+id/action_fragment_collection_to_rssSearchFragment"
+            app:destination="@id/fragment_rss_search" />
+        <action
+            android:id="@+id/action_fragment_collection_to_rssEditFragment"
+            app:destination="@id/fragment_rss_edit" />
     </fragment>
 
     <fragment
         android:id="@+id/fragment_rss_add"
         android:name="com.youngerhousea.simplereader.fragment.RssAddFragment"
-        android:label="Add Rss">
-    </fragment>
+        android:label="Add Rss" />
 
+    <fragment
+        android:id="@+id/fragment_rss_edit"
+        android:name="com.youngerhousea.simplereader.fragment.RssEditFragment"
+        android:label="RssEditFragment" />
+    <fragment
+        android:id="@+id/fragment_rss_search"
+        android:name="com.youngerhousea.simplereader.fragment.RssSearchFragment"
+        android:label="RssSearchFragment" />
 
     <dialog
         android:id="@+id/dialog_fragment_add_group"
         android:name="com.youngerhousea.simplereader.fragment.AddGroupDialogFragment"
-        android:label="AddGroupDialogFragment">
-    </dialog>
-
+        android:label="AddGroupDialogFragment" />
 
 </navigation>

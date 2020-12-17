@@ -1,50 +1,74 @@
 package com.youngerhousea.simplereader.adapter;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.chip.Chip;
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.data.model.GroupWithSubscribeRss;
+import com.youngerhousea.simplereader.databinding.FragmentRssEditItemBinding;
+import com.youngerhousea.simplereader.databinding.FragmentRssEditSubItemBinding;
 
 import java.util.List;
 
-public class RssEditAdapter extends RecyclerView.Adapter<RssEditAdapter.ViewHolder> {
-    private List<GroupWithSubscribeRss> groupWithSubscribeRsses;
+public class RssEditAdapter extends DataBindingExpandableListAdapter<FragmentRssEditItemBinding, FragmentRssEditSubItemBinding> {
+    private final List<GroupWithSubscribeRss> groupWithSubscribeRssList;
 
     public RssEditAdapter(List<GroupWithSubscribeRss> groupWithSubscribeRssList) {
-        this.groupWithSubscribeRsses = groupWithSubscribeRssList;
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_rss_edit_group_view, parent, false);
-        return new ViewHolder(v);
+        this.groupWithSubscribeRssList = groupWithSubscribeRssList;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Chip chip = holder.constraintLayout.findViewById(R.id.chip);
-        chip.setText(groupWithSubscribeRsses.get(position).toString());
+    public int getGroupLayoutId() {
+        return R.layout.fragment_rss_edit_item;
     }
 
     @Override
-    public int getItemCount() {
-        return groupWithSubscribeRsses.size();
+    public int getChildLayoutId() {
+        return R.layout.fragment_rss_edit_sub_item;
     }
 
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ConstraintLayout constraintLayout;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            constraintLayout = (ConstraintLayout) itemView;
-        }
+    @Override
+    public int getGroupCount() {
+        return groupWithSubscribeRssList.size();
     }
+
+    @Override
+    public int getChildrenCount(int groupPosition) {
+        return groupWithSubscribeRssList.get(groupPosition).getUrls().size();
+    }
+
+    @Override
+    public Object getGroup(int groupPosition) {
+        return groupWithSubscribeRssList.get(groupPosition);
+    }
+
+    @Override
+    public Object getChild(int groupPosition, int childPosition) {
+        return groupWithSubscribeRssList.get(groupPosition).getUrls().get(childPosition);
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
+    }
+
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        convertView = super.getGroupView(groupPosition, isExpanded, convertView, parent);
+        groupDataBinding.setGroup(groupWithSubscribeRssList.get(groupPosition).getGroup());
+        return convertView;
+    }
+
+    @Override
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        convertView = super.getChildView(groupPosition, childPosition, isLastChild, convertView, parent);
+        childDataBinding.setUrl(groupWithSubscribeRssList.get(groupPosition).getUrls().get(childPosition));
+        return convertView;
+    }
+
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+        return true;
+    }
+
 }

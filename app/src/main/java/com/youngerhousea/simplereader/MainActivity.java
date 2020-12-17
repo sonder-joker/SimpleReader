@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 new AppBarConfiguration.Builder()
                         .setOpenableLayout(dataBinding.drawerLayout)
                         .build();
+
         NavigationUI.setupWithNavController(dataBinding.drawerNav, navController);
     }
 

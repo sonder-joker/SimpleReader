@@ -39,7 +39,7 @@ public class RssAddFragment extends BaseFragment<FragmentRssAddBinding, RssAddVi
             Integer groupId = viewModel.groupId.getValue();
             String url = viewModel.urlToAdd.getValue();
 
-            if (Utils.isEmpty(url) || Utils.isEmpty(groupId))
+            if (Utils.isNullOrEmpty(url) || Utils.isNullOrEmpty(groupId))
                 Snackbar.make(view, R.string.cannot_add_empty, Snackbar.LENGTH_SHORT).show();
             else
                 viewModel.insertSubscribeRss();

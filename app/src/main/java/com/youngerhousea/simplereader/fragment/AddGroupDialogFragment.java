@@ -2,7 +2,6 @@ package com.youngerhousea.simplereader.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -40,7 +39,7 @@ public class AddGroupDialogFragment extends BaseDialogFragment<DialogFragmentRss
         builder.setView(dataBinding.getRoot())
                 .setPositiveButton(R.string.dialog_rss_add_determine, (dialog, which) -> {
                     final String groupToAdd = viewModel.groupToAdd.getValue();
-                    if (Utils.isNotEmpty(groupToAdd))
+                    if (Utils.isNotNullOrEmpty(groupToAdd))
                         viewModel.insertGroup();
                     else
                         Snackbar.make(view, R.string.cannot_add_empty, Snackbar.LENGTH_SHORT).show();

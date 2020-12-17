@@ -58,7 +58,6 @@ public class CollectionFragment extends BaseFragment<FragmentCollectionBinding, 
                             value = "EDIT";
                             break;
                     }
-
                     tab.setText(value);
                 }).attach();
     }
@@ -70,6 +69,6 @@ public class CollectionFragment extends BaseFragment<FragmentCollectionBinding, 
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onOptionsItemSelected(item);
+        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
     }
 }
