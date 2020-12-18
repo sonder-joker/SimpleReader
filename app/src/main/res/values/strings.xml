@@ -2,7 +2,7 @@
     <string name="app_name">SimpleReader</string>
     <string name="activity_main_bottom_first">News</string>
     <string name="activity_main_bottom_second">Me</string>
-    <string name="activity_main_drawer_first">Add rss</string>
+    <string name="activity_main_drawer_first">Add theRsses</string>
     <string name="fragment_rss_add_btn_confirm">Confirm</string>
     <string name="fragment_rss_add_url">Url</string>
     <string name="fragment_rss_add_group">Group</string>

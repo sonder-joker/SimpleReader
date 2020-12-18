@@ -4,21 +4,14 @@ import androidx.lifecycle.LiveData;
 
 import com.youngerhousea.simplereader.api.ApiResponse;
 import com.youngerhousea.simplereader.api.FetchRss;
+import com.youngerhousea.simplereader.api.xml.TheRss;
+import com.youngerhousea.simplereader.base.Resource;
 import com.youngerhousea.simplereader.data.SubscribeRssDao;
 import com.youngerhousea.simplereader.data.model.GroupWithSubscribeRss;
-
-import org.reactivestreams.Subscription;
 
 import java.util.List;
 
 import javax.inject.Inject;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.FlowableSubscriber;
-import io.reactivex.rxjava3.functions.Action;
-import io.reactivex.rxjava3.functions.Consumer;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class NewsRepository {
 
@@ -35,38 +28,35 @@ public class NewsRepository {
     }
 
 
-
     public LiveData<List<GroupWithSubscribeRss>> getAllSubscribeRssWithGroup() {
         return subScribeRssDao.getAllSubscribeRssWithGroup();
     }
 
-    public LiveData<String> getRss() {
-        return new NetworkBoundResource<List<GroupWithSubscribeRss>, String>() {
+    public LiveData<Resource<TheRss>> getRss() {
+        return new NetworkBoundResource<TheRss, List<GroupWithSubscribeRss>>() {
 
             @Override
-            protected boolean shouldFetchData(List<GroupWithSubscribeRss> data) {
+            protected void saveCallResult(List<GroupWithSubscribeRss> item) {
+
+            }
+
+            @Override
+            protected boolean shouldFetchData(TheRss data) {
                 return data == null;
             }
 
             @Override
-            protected LiveData<List<GroupWithSubscribeRss>> loadFromDb() {
-                return subScribeRssDao.getAllSubscribeRssWithGroup();
+            protected LiveData<TheRss> loadFromDb() {
+                return subScribeRssDao.getAllSubscribeRssWithGroup().observe();
             }
 
             @Override
-            protected LiveData<ApiResponse<String>> createCall() {
-                return fetchRss.getRss()
-                        .observeOn(Schedulers.io())
-                        .subscribeOn(AndroidSchedulers.mainThread())
-                        .subscribe(s -> {
-
-                        }, throwable -> {
-
-                        }, () -> {
-
-                        });
+            protected LiveData<ApiResponse<List<GroupWithSubscribeRss>>> createCall() {
+                return null;
             }
         }.asLiveData();
+
     }
+
 
 }

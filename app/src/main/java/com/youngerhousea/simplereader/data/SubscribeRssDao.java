@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
+import com.youngerhousea.simplereader.api.xml.TheRss;
 import com.youngerhousea.simplereader.data.model.Group;
 import com.youngerhousea.simplereader.data.model.GroupIdAndUrl;
 import com.youngerhousea.simplereader.data.model.SubscribeRss;
@@ -27,9 +28,6 @@ public interface SubscribeRssDao {
     @Query("SELECT * FROM groupList")
     List<GroupWithSubscribeRss> getAllSubscribeRssWithGroupData();
 
-//    @Query("SELECT  groupName, url FROM groupList INNER JOIN subscribeRssList ON groupList.groupId == subscribeRssList.groupId")
-//    LiveData<List<GroupNameWithUrl>> getAllGroupNameWithUrl();
-
     @Query("SELECT DISTINCT groupName FROM groupList")
     LiveData<List<String>> getAllGroup();
 
@@ -38,5 +36,10 @@ public interface SubscribeRssDao {
 
     @Insert(entity = Group.class)
     Completable insertGroup(Group groupName);
+
+    @Insert(entity = TheRss.class)
+    Completable insertRss(TheRss... theRsses);
+
+
 }
 

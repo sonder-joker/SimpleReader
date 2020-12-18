@@ -1,8 +1,10 @@
 package com.youngerhousea.simplereader.base;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Resource<T> {
+    private Status status;
     private T data;
     private String message;
 
@@ -14,30 +16,20 @@ public class Resource<T> {
         return message;
     }
 
-    public Resource(T data, String message) {
+    public Resource(Status status, T data, String message) {
+        this.status = status;
         this.data = data;
         this.message = message;
     }
 
-    public Resource(T data) {
-        this.data = data;
+    public static <T> Resource<T> success(@Nullable T data) {
+        return new Resource<>(Status.SUCCESS, data, null);
+    }
+    public static <T> Resource<T> error(String message, T data) {
+        return new Resource<>(Status.ERROR, data, message);
+    }
+    public static <T> Resource<T> loading(@Nullable T data) {
+        return new Resource<>(Status.LOADING, data, null);
     }
 
-    public static class Success<T> extends Resource<T> {
-        public Success(@NotNull T data) {
-            super(data);
-        }
-    }
-
-    public static class Loading<T> extends Resource<T> {
-        public Loading(T data) {
-            super(data);
-        }
-    }
-
-    public static class Error<T> extends Resource<T> {
-        public Error(T data, String message) {
-            super(data, message);
-        }
-    }
 }

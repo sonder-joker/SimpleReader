@@ -4,7 +4,6 @@ import androidx.annotation.MainThread;
 import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.Observer;
 
 import com.youngerhousea.simplereader.api.ApiResponse;
 import com.youngerhousea.simplereader.base.Resource;
@@ -13,7 +12,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
     private final MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
 
     public NetworkBoundResource() {
-        result.setValue(new Resource.Loading<>(null));
+        result.setValue(Resource.loading(null));
         LiveData<ResultType> dbSource = loadFromDb();
         result.addSource(dbSource, data -> {
             result.removeSource(dbSource);
@@ -21,7 +20,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
                 fetchFromNetwork(dbSource);
             } else {
                 result.addSource(dbSource, newData -> {
-                    setValue(new Resource.Success<>(newData));
+                    setValue(Resource.success(newData));
                 });
             }
         });
@@ -36,7 +35,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
     private void fetchFromNetwork(LiveData<ResultType> dbSource) {
         LiveData<ApiResponse<RequestType>> apiResponse = createCall();
         result.addSource(dbSource, newData ->
-                setValue(new Resource.Loading<>(newData))
+                setValue(Resource.loading(newData))
         );
         result.addSource(apiResponse,
                 response -> {
@@ -44,13 +43,18 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
                     result.removeSource(dbSource);
                     if (response instanceof ApiResponse.Success) {
                         saveCallResult(processResponse((ApiResponse.Success<RequestType>) response));
-                        result.addSource(loadFromDb(), result -> {
-                            setValue(result);
+                        result.addSource(loadFromDb(), newData -> {
+                            setValue(Resource.success(newData));
                         });
                     } else if (response instanceof ApiResponse.Empty) {
-
+                        result.addSource(loadFromDb(), newData -> {
+                            setValue(Resource.success(newData));
+                        });
                     } else if (response instanceof ApiResponse.Error) {
-
+                        onFetchedFailed();
+                        result.addSource(dbSource, newData -> {
+                            setValue(Resource.error(((ApiResponse.Error<RequestType>) response).getErrorMessage(), newData));
+                        });
                     }
                 });
 
@@ -62,7 +66,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
     }
 
     protected LiveData<Resource<ResultType>> asLiveData() {
-        return (LiveData<Resource<ResultType>>) result;
+        return result;
     }
 
     @WorkerThread
