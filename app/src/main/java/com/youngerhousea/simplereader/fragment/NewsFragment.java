@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.lifecycle.Observer;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -14,11 +13,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.navigation.NavigationView;
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.adapter.NewsRecycleViewAdapter;
 import com.youngerhousea.simplereader.base.BaseFragment;
-import com.youngerhousea.simplereader.data.model.GroupWithSubscribeRss;
 import com.youngerhousea.simplereader.databinding.FragmentNewsBinding;
 import com.youngerhousea.simplereader.viewmodel.NewsViewModel;
 
@@ -26,9 +23,12 @@ import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
+import static com.youngerhousea.simplereader.adapter.NewsRecycleViewAdapter.*;
+
 @AndroidEntryPoint
 public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewModel> {
     AppBarConfiguration appBarConfiguration;
+    RecyclerView.Adapter<NewsViewHolder> adapter;
 
     @Override
     public int getBindingViewModel() {
@@ -47,7 +47,6 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewMode
 
         setToolbar();
         setRecycleView();
-
     }
 
     private void setToolbar() {
@@ -56,9 +55,16 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewMode
     }
 
     private void setRecycleView() {
+        viewModel.subscribeRssList.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> urlList) {
+                adapter = new NewsRecycleViewAdapter(urlList);
+            }
+        });
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         dataBinding.newsRecycleView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter<NewsRecycleViewAdapter.NewsViewHolder> adapter = new NewsRecycleViewAdapter();
+
         dataBinding.newsRecycleView.setAdapter(adapter);
     }
 

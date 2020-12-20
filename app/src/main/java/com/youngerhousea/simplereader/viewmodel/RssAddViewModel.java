@@ -7,20 +7,20 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 
 import com.youngerhousea.simplereader.base.BaseViewModel;
-import com.youngerhousea.simplereader.repository.RssAddRepository;
+import com.youngerhousea.simplereader.repository.CollectionRepository;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class RssAddViewModel extends BaseViewModel {
-    private final RssAddRepository repository;
+    private final CollectionRepository repository;
     public LiveData<List<String>> groups;
     public MutableLiveData<String> urlToAdd = new MutableLiveData<>();
     public MutableLiveData<Integer> groupId = new MutableLiveData<>();
 
     @ViewModelInject
-    public RssAddViewModel(@Assisted SavedStateHandle savedStateHandle, @NotNull RssAddRepository repository) {
+    public RssAddViewModel(@Assisted SavedStateHandle savedStateHandle, @NotNull CollectionRepository repository) {
         this.repository = repository;
         groups = repository.getAllGroup();
     }

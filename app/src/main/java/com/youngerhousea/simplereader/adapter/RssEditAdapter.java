@@ -4,17 +4,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.youngerhousea.simplereader.R;
-import com.youngerhousea.simplereader.data.model.GroupWithSubscribeRss;
+import com.youngerhousea.simplereader.base.DataBindingExpandableListAdapter;
+import com.youngerhousea.simplereader.data.model.GroupWithRssUrls;
 import com.youngerhousea.simplereader.databinding.FragmentRssEditItemBinding;
 import com.youngerhousea.simplereader.databinding.FragmentRssEditSubItemBinding;
 
 import java.util.List;
 
 public class RssEditAdapter extends DataBindingExpandableListAdapter<FragmentRssEditItemBinding, FragmentRssEditSubItemBinding> {
-    private final List<GroupWithSubscribeRss> groupWithSubscribeRssList;
+    private final List<GroupWithRssUrls> groupWithRssUrlsList;
 
-    public RssEditAdapter(List<GroupWithSubscribeRss> groupWithSubscribeRssList) {
-        this.groupWithSubscribeRssList = groupWithSubscribeRssList;
+    public RssEditAdapter(List<GroupWithRssUrls> groupWithRssUrlsList) {
+        this.groupWithRssUrlsList = groupWithRssUrlsList;
     }
 
     @Override
@@ -29,22 +30,22 @@ public class RssEditAdapter extends DataBindingExpandableListAdapter<FragmentRss
 
     @Override
     public int getGroupCount() {
-        return groupWithSubscribeRssList.size();
+        return groupWithRssUrlsList.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return groupWithSubscribeRssList.get(groupPosition).getUrls().size();
+        return groupWithRssUrlsList.get(groupPosition).getUrls().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return groupWithSubscribeRssList.get(groupPosition);
+        return groupWithRssUrlsList.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return groupWithSubscribeRssList.get(groupPosition).getUrls().get(childPosition);
+        return groupWithRssUrlsList.get(groupPosition).getUrls().get(childPosition);
     }
 
     @Override
@@ -55,14 +56,14 @@ public class RssEditAdapter extends DataBindingExpandableListAdapter<FragmentRss
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         convertView = super.getGroupView(groupPosition, isExpanded, convertView, parent);
-        groupDataBinding.setGroup(groupWithSubscribeRssList.get(groupPosition).getGroup());
+        groupDataBinding.setGroup(groupWithRssUrlsList.get(groupPosition).getGroup());
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         convertView = super.getChildView(groupPosition, childPosition, isLastChild, convertView, parent);
-        childDataBinding.setUrl(groupWithSubscribeRssList.get(groupPosition).getUrls().get(childPosition));
+        childDataBinding.setUrl(groupWithRssUrlsList.get(groupPosition).getUrls().get(childPosition));
         return convertView;
     }
 

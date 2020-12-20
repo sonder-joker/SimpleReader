@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.youngerhousea.simplereader.fragment.RssAddFragment;
-import com.youngerhousea.simplereader.fragment.RssEditFragment;
-import com.youngerhousea.simplereader.fragment.RssSearchFragment;
+import com.youngerhousea.simplereader.fragment.collection.RssAddFragment;
+import com.youngerhousea.simplereader.fragment.collection.RssEditFragment;
+import com.youngerhousea.simplereader.fragment.collection.RssSearchFragment;
 
 public class CollectionAdapter extends FragmentStateAdapter {
     public CollectionAdapter(Fragment fragment) {

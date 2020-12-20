@@ -4,19 +4,19 @@ import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 
 import com.youngerhousea.simplereader.base.BaseViewModel;
-import com.youngerhousea.simplereader.data.model.GroupWithSubscribeRss;
-import com.youngerhousea.simplereader.repository.RssAddRepository;
+import com.youngerhousea.simplereader.data.model.GroupWithRssUrls;
+import com.youngerhousea.simplereader.repository.CollectionRepository;
 
 import java.util.List;
 
 public class RssEditViewModel extends BaseViewModel {
-    private final RssAddRepository rssAddRepository;
-    public LiveData<List<GroupWithSubscribeRss>> subscribeRssWithGroups;
+    private final CollectionRepository collectionRepository;
+    public LiveData<List<GroupWithRssUrls>> subscribeRssWithGroups;
 
     @ViewModelInject
-    public RssEditViewModel(RssAddRepository rssAddRepository) {
-        this.rssAddRepository = rssAddRepository;
-        this.subscribeRssWithGroups = rssAddRepository.getSubscribeRssWithGroupList();
+    public RssEditViewModel(CollectionRepository collectionRepository) {
+        this.collectionRepository = collectionRepository;
+        this.subscribeRssWithGroups = collectionRepository.getSubscribeRssWithGroupList();
     }
 
 }

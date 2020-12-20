@@ -10,8 +10,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.data.AppDatabase;
-import com.youngerhousea.simplereader.data.SubscribeRssDao;
-import com.youngerhousea.simplereader.data.model.Group;
+import com.youngerhousea.simplereader.data.RssDao;
+import com.youngerhousea.simplereader.data.model.entity.Group;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -37,19 +37,19 @@ public class DatabaseModule {
         ).fallbackToDestructiveMigration()
                 .addCallback(new RoomDatabase.Callback() {
                     @Inject
-                    SubscribeRssDao subscribeRssDao;
+                    RssDao rssDao;
 
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
-                        subscribeRssDao.insertGroup(new Group(context.getString(R.string.global_default_group_name)));
+                        rssDao.insertGroup(new Group(context.getString(R.string.global_default_group_name)));
                     }
                 }).build();
     }
 
     @Provides
     @Singleton
-    SubscribeRssDao provideSubscribeDatabase(AppDatabase appDatabase) {
+    RssDao provideSubscribeDatabase(AppDatabase appDatabase) {
         return appDatabase.getSubscribeRssDao();
     }
 

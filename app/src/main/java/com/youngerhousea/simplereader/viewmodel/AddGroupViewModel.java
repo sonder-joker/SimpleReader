@@ -4,14 +4,14 @@ import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
 
 import com.youngerhousea.simplereader.base.BaseViewModel;
-import com.youngerhousea.simplereader.repository.RssAddRepository;
+import com.youngerhousea.simplereader.repository.CollectionRepository;
 
 public class AddGroupViewModel extends BaseViewModel {
-    private RssAddRepository repository;
+    private CollectionRepository repository;
     public MutableLiveData<String> groupToAdd = new MutableLiveData<>("");
 
     @ViewModelInject
-    public AddGroupViewModel(RssAddRepository repository) {
+    public AddGroupViewModel(CollectionRepository repository) {
         this.repository = repository;
     }
 

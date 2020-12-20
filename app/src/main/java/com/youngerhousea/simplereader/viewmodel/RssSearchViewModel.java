@@ -6,16 +6,16 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 
 import com.youngerhousea.simplereader.base.BaseViewModel;
-import com.youngerhousea.simplereader.repository.RssAddRepository;
+import com.youngerhousea.simplereader.repository.CollectionRepository;
 
 public class RssSearchViewModel extends BaseViewModel {
 
-    private final RssAddRepository repository;
+    private final CollectionRepository repository;
 
     public MutableLiveData<String> keyword = new MutableLiveData<>();
 
     @ViewModelInject
-    public RssSearchViewModel(@Assisted SavedStateHandle savedStateHandle, RssAddRepository repository) {
+    public RssSearchViewModel(@Assisted SavedStateHandle savedStateHandle, CollectionRepository repository) {
         this.repository = repository;
     }
 
