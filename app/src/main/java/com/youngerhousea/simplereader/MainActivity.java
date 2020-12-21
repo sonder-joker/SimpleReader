@@ -34,7 +34,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         drawerConfiguration =
                 new AppBarConfiguration.Builder()
                         .setOpenableLayout(dataBinding.drawerLayout)

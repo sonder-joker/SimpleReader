@@ -23,7 +23,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
 
     protected V viewModel;
 
-    protected NavHostFragment navHostFragment;
     protected NavController navController;
 
 
@@ -47,7 +46,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         dataBinding = DataBindingUtil.setContentView(this, getLayoutId());
         dataBinding.setVariable(getBindingViewModel(), viewModel);
         dataBinding.setLifecycleOwner(this);
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nav_host);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nav_host);
 
         if (navHostFragment != null) {
             navController = navHostFragment.getNavController();
