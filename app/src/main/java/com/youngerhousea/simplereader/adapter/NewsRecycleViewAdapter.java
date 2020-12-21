@@ -24,7 +24,7 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        com.youngerhousea.simplereader.databinding.ItemFragmentNewsBinding item = DataBindingUtil.inflate(layoutInflater, getGroupLayoutId(), parent, false);
+        ItemFragmentNewsBinding item = DataBindingUtil.inflate(layoutInflater, getGroupLayoutId(), parent, false);
         return new NewsViewHolder(item);
     }
 
