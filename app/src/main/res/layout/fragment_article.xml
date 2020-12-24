@@ -6,15 +6,14 @@
     <data>
 
         <variable
-            name="newsViewModel"
-            type="com.youngerhousea.simplereader.viewmodel.NewsViewModel" />
+            name="articleViewModel"
+            type="com.youngerhousea.simplereader.viewmodel.ArticleViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".fragment.NewsFragment">
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -44,12 +43,10 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/news_recycle_view"
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
+            android:layout_height="673dp"
+            android:text="Hello" />
     </LinearLayout>
 </layout>

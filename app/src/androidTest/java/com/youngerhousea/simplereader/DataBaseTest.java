@@ -33,6 +33,7 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -96,41 +97,15 @@ public class DataBaseTest {
 
     }
 
+
+
     @Test
-    public void testRssSource() throws InterruptedException {
-        RssUrl rssUrl = new RssUrl(1, "test1");
-        new NetworkBoundResource<Channel, Channel>() {
-            @Override
-            protected void saveCallResult(Channel item) {
-                rssDao.insertRssSource(new RssSource(rssUrl.getRssUrlId(), item));
-            }
+    void testNewInterface() {
 
-            @Override
-            protected boolean shouldFetchData(Channel data) {
-                return data == null /*|| time > setting*/;
-            }
-
-            @Override
-            protected LiveData<Channel> loadFromDb() {
-                return Transformations.map(rssDao.getRssSource(rssUrl.getUrl()), RssUrlAndRssSource::getChannel);
-            }
-
-            @Override
-            protected LiveData<ApiResponse<Channel>> createCall() {
-                return fetchRss.getChannel(rssUrl.getUrl());
-            }
-        }.asLiveData().observeForever(new Observer<Resource<Channel>>() {
-            @Override
-            public void onChanged(Resource<Channel> channelResource) {
-                System.out.println(channelResource);
-            }
-        });
-        Thread.sleep(10000);
     }
 
-
     @After
-    public void closeDb() throws IOException {
+    public void closeDb() {
         appDatabase.close();
     }
 

@@ -15,6 +15,10 @@ public class Resource<T> {
         return message;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     public Resource(Status status, T data, String message) {
         this.status = status;
         this.data = data;

@@ -23,7 +23,7 @@ public final class ChannelConverterFactory extends Converter.Factory {
     @Nullable
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(@NotNull Type type, Annotation @NotNull [] annotations, @NotNull Retrofit retrofit) {
-        if(Channel.class.equals(type)) {
+        if (Channel.class.equals(type)) {
             return new Converter<ResponseBody, Channel>() {
                 @Nullable
                 @Override

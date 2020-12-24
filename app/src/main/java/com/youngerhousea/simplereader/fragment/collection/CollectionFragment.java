@@ -6,6 +6,10 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -63,12 +67,32 @@ public class CollectionFragment extends BaseFragment<FragmentCollectionBinding, 
     }
 
     private void setToolbar() {
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupWithNavController(dataBinding.fragmentToolbar, navController, appBarConfiguration);
-    }
+        NavController navController = Navigation.findNavController(view);
+        AppBarConfiguration appBarConfiguration =
+                new AppBarConfiguration.Builder(navController.getGraph()).build();
+        Toolbar toolbar = dataBinding.fragmentToolbar;
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.dialog_fragment_add_group:{
+                        NavDirections direction = CollectionFragmentDirections.actionFragmentCollectionToDialogFragmentAddGroup();
+                        navController.navigate(direction);
+                        return true;
+                    }
+                    case R.id.action_export:{
+                        return true;
+                    }
+                    case R.id.action_import:{
+                        return true;
+                    }
+                    default:
+                        return false;
+                }
+            }
+        });
+        NavigationUI.setupWithNavController(
+                toolbar, navController, appBarConfiguration);
     }
 }

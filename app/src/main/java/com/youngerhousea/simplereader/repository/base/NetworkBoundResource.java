@@ -5,13 +5,21 @@ import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
+import com.youngerhousea.simplereader.AppExecutors;
 
-// ResultType: Type for the Resource data.
-// RequestType: Type for the API response.
+
 public abstract class NetworkBoundResource<ResultType, RequestType> {
     private final MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
+    private AppExecutors appExecutors;
 
-    public NetworkBoundResource() {
+    /**
+     * ResultType: Type for the Resource data<br>
+     * RequestType: Type for the API response.
+     */
+    @MainThread
+    public NetworkBoundResource(AppExecutors executors) {
+        this.appExecutors = executors;
+
         result.setValue(Resource.loading(null));
         LiveData<ResultType> dbSource = loadFromDb();
         result.addSource(dbSource, data -> {
@@ -42,14 +50,18 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
                     result.removeSource(apiResponse);
                     result.removeSource(dbSource);
                     if (response instanceof ApiResponse.Success) {
-                        saveCallResult(processResponse((ApiResponse.Success<RequestType>) response));
-                        result.addSource(loadFromDb(), newData -> {
-                            setValue(Resource.success(newData));
-                        });
+                       appExecutors.getDiskIO().execute(() -> {
+                           saveCallResult(processResponse((ApiResponse.Success<RequestType>) response));
+                           appExecutors.getMainThread().execute(() -> {
+                               result.addSource(loadFromDb(), newData -> {
+                                   setValue(Resource.success(newData));
+                               });
+                           });
+                       });
                     } else if (response instanceof ApiResponse.Empty) {
-                        result.addSource(loadFromDb(), newData -> {
+                        appExecutors.getMainThread().execute(() -> result.addSource(loadFromDb(), newData -> {
                             setValue(Resource.success(newData));
-                        });
+                        }));
                     } else if (response instanceof ApiResponse.Error) {
                         onFetchedFailed();
                         result.addSource(dbSource, newData -> {

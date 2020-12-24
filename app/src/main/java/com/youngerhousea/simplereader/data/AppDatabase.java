@@ -13,4 +13,5 @@ import com.youngerhousea.simplereader.data.model.entity.RssUrl;
 public abstract class AppDatabase extends RoomDatabase {
     public abstract RssDao getSubscribeRssDao();
 
+    public abstract SourceDao getSourceDao();
 }

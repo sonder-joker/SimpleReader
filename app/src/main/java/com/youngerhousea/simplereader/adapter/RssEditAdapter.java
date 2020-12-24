@@ -6,12 +6,12 @@ import android.view.ViewGroup;
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.base.DataBindingExpandableListAdapter;
 import com.youngerhousea.simplereader.data.model.GroupWithRssUrls;
-import com.youngerhousea.simplereader.databinding.FragmentRssEditItemBinding;
-import com.youngerhousea.simplereader.databinding.FragmentRssEditSubItemBinding;
+import com.youngerhousea.simplereader.databinding.ItemFragmentRssEditBinding;
+import com.youngerhousea.simplereader.databinding.ItemFragmentRssEditSubBinding;
 
 import java.util.List;
 
-public class RssEditAdapter extends DataBindingExpandableListAdapter<FragmentRssEditItemBinding, FragmentRssEditSubItemBinding> {
+public class RssEditAdapter extends DataBindingExpandableListAdapter<ItemFragmentRssEditBinding, ItemFragmentRssEditSubBinding> {
     private final List<GroupWithRssUrls> groupWithRssUrlsList;
 
     public RssEditAdapter(List<GroupWithRssUrls> groupWithRssUrlsList) {
@@ -20,12 +20,12 @@ public class RssEditAdapter extends DataBindingExpandableListAdapter<FragmentRss
 
     @Override
     public int getGroupLayoutId() {
-        return R.layout.fragment_rss_edit_item;
+        return R.layout.item_fragment_rss_edit;
     }
 
     @Override
     public int getChildLayoutId() {
-        return R.layout.fragment_rss_edit_sub_item;
+        return R.layout.item_fragment_rss_edit_sub;
     }
 
     @Override

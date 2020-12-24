@@ -21,8 +21,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(SingletonComponent.class)
 public class NetworkModule {
     private static final int DEFAULT_TIMEOUT = 5;
-    private static final OkHttpClient.Builder builder = new OkHttpClient.Builder().connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-    private static final String baseUrl = "https://127.0.0.1";
+    private static final OkHttpClient.Builder builder = new OkHttpClient.Builder();
+    private static final String baseUrl = "https://rsshub.app";
 
     @Provides
     @Singleton

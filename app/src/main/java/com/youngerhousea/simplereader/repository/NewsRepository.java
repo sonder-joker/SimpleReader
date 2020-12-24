@@ -1,64 +1,51 @@
 package com.youngerhousea.simplereader.repository;
 
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.Transformations;
 
 import com.prof.rssparser.Channel;
-import com.youngerhousea.simplereader.data.RssDao;
-import com.youngerhousea.simplereader.data.model.GroupWithRssUrls;
-import com.youngerhousea.simplereader.data.model.RssUrlAndRssSource;
+import com.youngerhousea.simplereader.AppExecutors;
+import com.youngerhousea.simplereader.data.SourceDao;
+import com.youngerhousea.simplereader.data.model.entity.RssSource;
 import com.youngerhousea.simplereader.net.api.FetchRss;
 import com.youngerhousea.simplereader.repository.base.ApiResponse;
 import com.youngerhousea.simplereader.repository.base.NetworkBoundResource;
 import com.youngerhousea.simplereader.repository.base.Resource;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.inject.Inject;
 
 public class NewsRepository {
-
-    private final String TAG = this.getClass().getName();
-
-    private final RssDao rssDao;
-
+    private final AppExecutors appExecutors;
+    private SourceDao sourceDao;
     private final FetchRss fetchRss;
 
     @Inject
-    public NewsRepository(RssDao rssDao, FetchRss fetchRss) {
-        this.rssDao = rssDao;
+    public NewsRepository(SourceDao sourceDao, FetchRss fetchRss, AppExecutors appExecutors) {
+        this.sourceDao = sourceDao;
         this.fetchRss = fetchRss;
+        this.appExecutors = appExecutors;
     }
 
-
-    public LiveData<List<String>> getAllRssUrl() {
-        return Transformations.map(rssDao.getAllSubscribeRssWithGroup(),
-                input -> input.stream()
-                        .flatMap(groupWithRssUrls -> groupWithRssUrls.getUrls().stream())
-                        .collect(Collectors.toList()));
+    public LiveData<List<String>> getRssUrl() {
+        return sourceDao.getRssUrl();
     }
 
-
-    public LiveData<Resource<Channel>> getRssSource(String url) {
-
-        return new NetworkBoundResource<Channel, Channel>() {
+    public LiveData<Resource<RssSource>> getArticle(String url) {
+        return new NetworkBoundResource<RssSource, Channel>(appExecutors) {
             @Override
             protected void saveCallResult(Channel item) {
-                rssDao.insertRssSource(url, item);
+                sourceDao.insertRssSource(url, item);
             }
 
             @Override
-            protected boolean shouldFetchData(Channel data) {
-                return data == null /*|| time > setting*/;
+            protected boolean shouldFetchData(RssSource data) {
+                return data == null;
             }
 
             @Override
-            protected LiveData<Channel> loadFromDb() {
-                return Transformations.map(rssDao.getRssSource(url), RssUrlAndRssSource::getChannel);
+            protected LiveData<RssSource> loadFromDb() {
+                return sourceDao.getRssSource(url);
             }
 
             @Override
@@ -67,5 +54,6 @@ public class NewsRepository {
             }
         }.asLiveData();
     }
+
 
 }

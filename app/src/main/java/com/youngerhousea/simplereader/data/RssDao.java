@@ -1,4 +1,4 @@
-package com.youngerhousea.simplereader.data;
+ package com.youngerhousea.simplereader.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -13,6 +13,7 @@ import com.youngerhousea.simplereader.data.model.entity.Group;
 import com.youngerhousea.simplereader.data.model.GroupIdAndRssUrl;
 import com.youngerhousea.simplereader.data.model.GroupWithRssUrls;
 import com.youngerhousea.simplereader.data.model.entity.RssUrl;
+import com.youngerhousea.simplereader.repository.base.Resource;
 
 import java.util.List;
 
@@ -25,10 +26,6 @@ public interface RssDao {
     @Query("SELECT * FROM groupList")
     LiveData<List<GroupWithRssUrls>> getAllSubscribeRssWithGroup();
 
-    @Transaction
-    @Query("SELECT * FROM groupList")
-    List<GroupWithRssUrls> getAllSubscribeRssWithGroupData();
-
     @Query("SELECT DISTINCT groupName FROM groupList")
     LiveData<List<String>> getAllGroup();
 
@@ -38,25 +35,5 @@ public interface RssDao {
     @Insert(entity = Group.class)
     Completable insertGroup(Group groupName);
 
-//    @Insert(entity = RssSource.class)
-//    Completable insertRssSource();
-
-    @Transaction
-    @Query("SELECT * FROM rssUrlList WHERE rssUrlList.url = :url")
-    LiveData<RssUrlAndRssSource> getRssSource(String url);
-
-    @Insert(entity = RssSource.class)
-    void insertRssSource(RssSource rssSource);
-
-    @Query("SELECT rssUrlId FROM rssUrlList WHERE rssUrlList.url = :url")
-    Integer getRssUrlId(String url);
-
-    @Query("SELECT * FROM rssSourceList WHERE rssUrlId = :rssUrlId")
-    RssSource getRssSource(Integer rssUrlId);
-
-    default void insertRssSource(String url, Channel channel) {
-        Integer id = getRssUrlId(url);
-        insertRssSource(new RssSource(id, channel));
-    }
 }
 
