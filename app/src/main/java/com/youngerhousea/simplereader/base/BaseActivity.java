@@ -17,21 +17,13 @@ import com.youngerhousea.simplereader.R;
 import java.lang.reflect.ParameterizedType;
 import java.util.Objects;
 
-public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseViewModel> extends AppCompatActivity {
+public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
 
     protected T dataBinding;
 
-    protected V viewModel;
 
     protected NavController navController;
 
-
-    /**
-     * Override for set binding variable
-     *
-     * @return variable id
-     */
-    public abstract int getBindingViewModel();
 
     /**
      * @return layout resource id
@@ -44,7 +36,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataBinding = DataBindingUtil.setContentView(this, getLayoutId());
-        dataBinding.setVariable(getBindingViewModel(), viewModel);
         dataBinding.setLifecycleOwner(this);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nav_host);
 

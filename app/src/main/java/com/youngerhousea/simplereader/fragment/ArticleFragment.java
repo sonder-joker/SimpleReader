@@ -40,12 +40,5 @@ public class ArticleFragment extends BaseFragment<FragmentArticleBinding, Articl
     }
 
     private void setToolbar() {
-        NavController navController = Navigation.findNavController(view);
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(navController.getGraph()).build();
-
-        NavigationUI.setupWithNavController(dataBinding.fragmentNewsCollapsingToolbarLayout,
-                dataBinding.fragmentToolbar, navController, appBarConfiguration);
-
     }
 }

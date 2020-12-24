@@ -42,17 +42,12 @@ public class RssEditFragment extends BaseFragment<FragmentRssEditBinding, RssEdi
 //        dataBinding.fragmentRssEditExpendableListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //            @Override
 //            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-////                RssEditFragmentDirections.ActionFragmentRssEditToDeleteDialogFragment action = RssEditFragmentDirections.actionFragmentRssEditToDeleteDialogFragment();
-//                if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
-//                    int groupPosition = ExpandableListView.getPackedPositionGroup(id);
-//                    int childPosition = ExpandableListView.getPackedPositionChild(id);
-//
-//                }
-//
+//                RssEditFragmentDirections.ActionFragmentRssEditToDeleteDialogFragment action = RssEditFragmentDirections.actionFragmentRssEditToDeleteDialogFragment();
+//                action.setGroup()
+//                navController.navigate(action);
 //                return true;
 //            }
 //        });
-//
 //        dataBinding.fragmentRssEditExpendableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 //            @Override
 //            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {

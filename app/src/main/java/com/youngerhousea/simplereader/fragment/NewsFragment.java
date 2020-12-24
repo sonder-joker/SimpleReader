@@ -2,13 +2,12 @@
 package com.youngerhousea.simplereader.fragment;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,37 +41,8 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewMode
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setToolbar();
+        setHasOptionsMenu(true);
         setRecycleView();
-
-    }
-
-    private void setToolbar() {
-        NavController navController = Navigation.findNavController(view);
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(navController.getGraph()).build();
-
-
-        dataBinding.fragmentToolbar.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.action_refresh: {
-                    //Todo:refresh
-                    return true;
-                }
-                case R.id.action_sort: {
-                    //Todo:sort
-                    return true;
-                }
-                case R.id.action_downland: {
-                    //todo:downland
-                    return true;
-                }
-                default:
-                    return super.onContextItemSelected(item);
-            }
-        });
-        NavigationUI.setupWithNavController(dataBinding.fragmentNewsCollapsingToolbarLayout,
-                dataBinding.fragmentToolbar, navController, appBarConfiguration);
 
     }
 
@@ -87,5 +57,13 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewMode
         dataBinding.newsRecycleView.setAdapter(adapter);
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_news, menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 }
