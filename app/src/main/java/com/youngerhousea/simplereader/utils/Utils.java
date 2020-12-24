@@ -13,6 +13,8 @@ import java.util.Objects;
 import lombok.SneakyThrows;
 
 public class Utils {
+    private static final Parser parser = new Parser.Builder().build();
+
     public static boolean isNullOrEmpty(String data) {
         return data == null || data.equals("");
     }
@@ -31,8 +33,9 @@ public class Utils {
 
     @SneakyThrows
     public static Channel parse(String rss) {
-        Parser parser = new Parser.Builder().build();
         final Channel[] channelArray = {new Channel()};
+
+
         parser.parse(rss, new OnTaskCompleted() {
             @Override
             public void onTaskCompleted(@NotNull Channel channel) {

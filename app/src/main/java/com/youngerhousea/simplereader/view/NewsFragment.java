@@ -11,14 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.prof.rssparser.Article;
 import com.youngerhousea.simplereader.BR;
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.adapter.NewsRecycleViewAdapter;
 import com.youngerhousea.simplereader.base.BaseFragment;
+import com.youngerhousea.simplereader.base.Resource;
+import com.youngerhousea.simplereader.base.Status;
+import com.youngerhousea.simplereader.data.model.entity.RssSource;
 import com.youngerhousea.simplereader.databinding.FragmentNewsBinding;
 import com.youngerhousea.simplereader.viewmodel.NewsViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -48,7 +55,20 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewMode
 
     private void setRecycleView() {
 
-        viewModel.data.observe(getViewLifecycleOwner(), resources -> {
+        viewModel.data.observe(getViewLifecycleOwner(), (List<Resource<RssSource>> resources) -> {
+            final boolean[] status = {true};
+            resources.forEach(new Consumer<Resource<RssSource>>() {
+                @Override
+                public void accept(Resource<RssSource> rssSourceResource) {
+                    if (rssSourceResource.getStatus() != Status.SUCCESS) {
+                        status[0] = false;
+                    }
+                }
+            });
+
+            List<Article> data = resources.stream().flatMap( (Resource<RssSource> rssSourceResource) -> {
+                return rssSourceResource.getData().getChannel().getArticles().stream();
+            }).collect(Collectors.toList());
             adapter.setItemList(resources);
         });
 

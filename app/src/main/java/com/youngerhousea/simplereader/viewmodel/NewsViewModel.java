@@ -5,6 +5,7 @@ import androidx.hilt.Assisted;
 import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.Transformations;
 
@@ -17,22 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsViewModel extends BaseViewModel {
-    private static final String TAG = "NewsViewModel";
 
+    public LiveData<Boolean> visibility = new MutableLiveData<>(false);
     private NewsRepository newsRepository;
 
-    public LiveData<List<String>> rssUrl;
-
     public LiveData<List<Resource<RssSource>>> data;
-
 
     @ViewModelInject
 
     public NewsViewModel(@Assisted SavedStateHandle savedStateHandle, NewsRepository newsRepository) {
         this.newsRepository = newsRepository;
 
-        rssUrl = newsRepository.getRssUrl();
-
+        LiveData<List<String>> rssUrl = newsRepository.getRssUrl();
         data = Transformations.switchMap(rssUrl, input -> {
             final MediatorLiveData<List<Resource<RssSource>>> returnData = new MediatorLiveData<>();
             for (int i = 0; i < input.size(); i++) {
@@ -59,4 +56,7 @@ public class NewsViewModel extends BaseViewModel {
     }
 
 
+    public void setVisibilityTrue() {
+        ((MutableLiveData<Boolean>) visibility).setValue(true);
+    }
 }

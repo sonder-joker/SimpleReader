@@ -76,11 +76,6 @@ public class RssEditAdapter extends DataBindingExpandableListAdapter<ItemFragmen
         convertView = super.getGroupView(groupPosition, isExpanded, convertView, parent);
         groupDataBinding.setGroup(groupWithRssUrlsList.get(groupPosition).getGroup());
 
-//        groupDataBinding.chip.setOnLongClickListener(v -> {
-//            RssEditFragmentDirections.ActionFragmentRssEditToDeleteDialogFragment action = RssEditFragmentDirections.actionFragmentRssEditToDeleteDialogFragment();
-//            action.setGroup(groupWithRssUrlsList.get(groupPosition).getGroup());
-//            return true;
-//        });
         return convertView;
     }
 

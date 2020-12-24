@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="articleViewModel"
-            type="com.youngerhousea.simplereader.viewmodel.ArticleViewModel" />
+            name="article"
+            type="com.prof.rssparser.Article" />
     </data>
 
     <LinearLayout
@@ -17,8 +17,17 @@
 
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@{article.title}" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:text="@{article.pubDate + '\n' + article.description}" />
     </LinearLayout>
 </layout>

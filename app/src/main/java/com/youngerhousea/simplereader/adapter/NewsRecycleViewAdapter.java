@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.FragmentNavigator;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.youngerhousea.simplereader.R;
@@ -55,7 +56,11 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
             @Override
             public void onClick(View v) {
                 NavDirections action = NewsFragmentDirections.actionFragmentNewsToFragmentArticle();
+                FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder()
+                        .build();
+
                 Navigation.findNavController(v).navigate(action);
+
             }
         });
     }

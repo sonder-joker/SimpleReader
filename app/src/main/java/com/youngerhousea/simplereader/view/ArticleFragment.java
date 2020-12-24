@@ -11,16 +11,16 @@ import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.base.BaseFragment;
 import com.youngerhousea.simplereader.databinding.FragmentArticleBinding;
 import com.youngerhousea.simplereader.viewmodel.ArticleViewModel;
+import com.youngerhousea.simplereader.viewmodel.NewsViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class ArticleFragment extends BaseFragment<FragmentArticleBinding, ArticleViewModel> {
-
+public class ArticleFragment extends BaseFragment<FragmentArticleBinding, NewsViewModel> {
 
     @Override
     public int getBindingViewModel() {
-        return BR.articleViewModel;
+        return BR.newsViewModel;
     }
 
     @Override
