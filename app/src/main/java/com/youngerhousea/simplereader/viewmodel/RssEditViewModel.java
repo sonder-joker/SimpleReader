@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData;
 
 import com.youngerhousea.simplereader.base.BaseViewModel;
 import com.youngerhousea.simplereader.data.model.GroupWithRssUrls;
+import com.youngerhousea.simplereader.data.model.entity.Group;
+import com.youngerhousea.simplereader.data.model.entity.RssUrl;
 import com.youngerhousea.simplereader.repository.CollectionRepository;
 
 import java.util.List;
@@ -19,4 +21,11 @@ public class RssEditViewModel extends BaseViewModel {
         this.subscribeRssWithGroups = collectionRepository.getSubscribeRssWithGroupList();
     }
 
+    public void deleteGroup(Group group) {
+        collectionRepository.deleteGroup(group);
+    }
+
+    public void deleteRssUrl(RssUrl rssUrl) {
+        collectionRepository.deleteRssUrl(rssUrl);
+    }
 }

@@ -18,8 +18,7 @@ public class GroupWithRssUrls {
     @Relation(
             parentColumn = "groupId",
             entityColumn = "groupId",
-            entity = RssUrl.class,
-            projection = {"url"}
+            entity = RssUrl.class
     )
-    private List<String> urls;
+    private List<RssUrl> urls;
 }

@@ -2,6 +2,7 @@
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -35,5 +36,10 @@ public interface RssDao {
     @Insert(entity = Group.class)
     Completable insertGroup(Group groupName);
 
+    @Delete(entity = Group.class)
+    void deleteGroup(Group group);
+
+    @Delete(entity = RssUrl.class)
+    void deleteRssUrl(RssUrl rssUrl);
 }
 

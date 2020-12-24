@@ -52,5 +52,4 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
             navController = navHostFragment.getNavController();
         }
     }
-
 }

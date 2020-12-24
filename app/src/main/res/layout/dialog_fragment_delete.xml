@@ -3,19 +3,13 @@
 
     <data>
         <variable
-            name="url"
-            type="com.youngerhousea.simplereader.data.model.entity.RssUrl" />
+            name="rssEditViewModel"
+            type="com.youngerhousea.simplereader.viewmodel.RssEditViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/chip"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{url.url}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

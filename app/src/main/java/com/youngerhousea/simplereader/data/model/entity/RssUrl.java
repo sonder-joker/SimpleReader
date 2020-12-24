@@ -7,6 +7,8 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 
@@ -17,7 +19,7 @@ import lombok.Data;
                 childColumns = "groupId"),
         indices = {@Index(value = "groupId")})
 @Data
-public class RssUrl {
+public class RssUrl implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private Integer rssUrlId;
 

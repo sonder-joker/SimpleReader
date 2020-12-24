@@ -43,7 +43,11 @@
     <fragment
         android:id="@+id/fragment_rss_edit"
         android:name="com.youngerhousea.simplereader.fragment.collection.RssEditFragment"
-        android:label="RssEditFragment" />
+        android:label="RssEditFragment" >
+        <action
+            android:id="@+id/action_fragment_rss_edit_to_deleteDialogFragment"
+            app:destination="@id/dialog_fragment_delete" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_rss_search"
         android:name="com.youngerhousea.simplereader.fragment.collection.RssSearchFragment"
@@ -57,5 +61,20 @@
         android:id="@+id/fragment_article"
         android:name="com.youngerhousea.simplereader.fragment.ArticleFragment"
         android:label="ArticleFragment"/>
+    <dialog
+        android:id="@+id/dialog_fragment_delete"
+        android:name="com.youngerhousea.simplereader.fragment.collection.DeleteDialogFragment"
+        android:label="DeleteDialogFragment" >
+        <argument
+            android:name="group"
+            app:argType="com.youngerhousea.simplereader.data.model.entity.Group"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="rssUrl"
+            app:argType="com.youngerhousea.simplereader.data.model.entity.RssUrl"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </dialog>
 
 </navigation>

@@ -37,14 +37,15 @@ public class AddGroupDialogFragment extends BaseDialogFragment<DialogFragmentRss
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(dataBinding.getRoot())
-                .setPositiveButton(R.string.dialog_rss_add_determine, (dialog, which) -> {
+                .setPositiveButton(R.string.dialog_global_determine, (dialog, which) -> {
                     final String groupToAdd = viewModel.groupToAdd.getValue();
-                    if (Utils.isNotNullOrEmpty(groupToAdd))
+                    if (Utils.isNotNullOrEmpty(groupToAdd)) {
                         viewModel.insertGroup();
-                    else
+                        Snackbar.make(view, R.string.success_add, Snackbar.LENGTH_SHORT).show();
+                    } else
                         Snackbar.make(view, R.string.cannot_add_empty, Snackbar.LENGTH_SHORT).show();
                 })
-                .setNegativeButton(R.string.dialog_rss_add_cancel, (dialog, which) -> dialog.cancel());
+                .setNegativeButton(R.string.dialog_global_cancel, (dialog, which) -> dialog.cancel());
 
         return builder.create();
     }

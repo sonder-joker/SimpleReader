@@ -8,6 +8,7 @@ import com.youngerhousea.simplereader.data.RssDao;
 import com.youngerhousea.simplereader.data.model.entity.Group;
 import com.youngerhousea.simplereader.data.model.GroupIdAndRssUrl;
 import com.youngerhousea.simplereader.data.model.GroupWithRssUrls;
+import com.youngerhousea.simplereader.data.model.entity.RssUrl;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -56,5 +57,13 @@ public class CollectionRepository {
 
     public void searchKeyWord(String keyword) {
 
+    }
+
+    public void deleteGroup(Group group) {
+        subScribeRssDao.deleteGroup(group);
+    }
+
+    public void deleteRssUrl(RssUrl rssUrl) {
+        subScribeRssDao.deleteRssUrl(rssUrl);
     }
 }

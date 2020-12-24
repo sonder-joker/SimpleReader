@@ -13,6 +13,8 @@ import com.youngerhousea.simplereader.base.BaseFragment;
 import com.youngerhousea.simplereader.databinding.FragmentRssEditBinding;
 import com.youngerhousea.simplereader.viewmodel.RssEditViewModel;
 
+import java.util.ArrayList;
+
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -31,8 +33,9 @@ public class RssEditFragment extends BaseFragment<FragmentRssEditBinding, RssEdi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final RssEditAdapter adapter = new RssEditAdapter(new ArrayList<>(), navController);
+        dataBinding.fragmentRssEditExpendableListView.setAdapter(adapter);
         viewModel.subscribeRssWithGroups.observe(getViewLifecycleOwner(),
-                groupWithSubscribeRssList ->
-                        dataBinding.fragmentRssEditExpendableListView.setAdapter(new RssEditAdapter(groupWithSubscribeRssList)));
+                adapter::setGroupWithRssUrlsList);
     }
 }

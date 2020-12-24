@@ -16,6 +16,7 @@ import com.youngerhousea.simplereader.BR;
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.adapter.NewsRecycleViewAdapter;
 import com.youngerhousea.simplereader.base.BaseFragment;
+import com.youngerhousea.simplereader.databinding.FragmentNewsBinding;
 import com.youngerhousea.simplereader.viewmodel.NewsViewModel;
 
 import java.util.ArrayList;

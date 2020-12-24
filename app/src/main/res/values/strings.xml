@@ -8,8 +8,8 @@
     <string name="fragment_rss_add_group">Group</string>
     <string name="fragment_rss_add_url_hint">Url you want to add</string>
     <string name="dialog_rss_add_put_in_title">put in title</string>
-    <string name="dialog_rss_add_determine">Sure</string>
-    <string name="dialog_rss_add_cancel">Canal</string>
+    <string name="dialog_global_determine">Sure</string>
+    <string name="dialog_global_cancel">Canal</string>
     <string name="dialog_fragment_collection_add_group">Add group</string>
     <string name="cannot_add_empty">Can not add empty thing</string>
     <string name="fragment_collection_title">Rss Reader</string>
@@ -22,4 +22,6 @@
     <string name="fragment_news_title">All article</string>
     <string name="dialog_fragment_collection_export">Export data</string>
     <string name="dialog_fragment_collection_import">Import data</string>
+    <string name="success_add">Success add</string>
+    <string name="success_delete">Success delete</string>
 </resources>
