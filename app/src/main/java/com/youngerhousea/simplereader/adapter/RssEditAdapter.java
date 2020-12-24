@@ -19,12 +19,10 @@ import com.youngerhousea.simplereader.fragment.collection.RssEditFragmentDirecti
 import java.util.List;
 
 public class RssEditAdapter extends DataBindingExpandableListAdapter<ItemFragmentRssEditBinding, ItemFragmentRssEditSubBinding> {
-    private final NavController navController;
     private List<GroupWithRssUrls> groupWithRssUrlsList;
 
     public RssEditAdapter(List<GroupWithRssUrls> groupWithRssUrlsList, NavController navController) {
         this.groupWithRssUrlsList = groupWithRssUrlsList;
-        this.navController = navController;
     }
 
     public void setGroupWithRssUrlsList(List<GroupWithRssUrls> groupWithRssUrlsList) {
@@ -53,6 +51,16 @@ public class RssEditAdapter extends DataBindingExpandableListAdapter<ItemFragmen
     }
 
     @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return childPosition;
+    }
+
+    @Override
     public Object getGroup(int groupPosition) {
         return groupWithRssUrlsList.get(groupPosition);
     }
@@ -72,12 +80,11 @@ public class RssEditAdapter extends DataBindingExpandableListAdapter<ItemFragmen
         convertView = super.getGroupView(groupPosition, isExpanded, convertView, parent);
         groupDataBinding.setGroup(groupWithRssUrlsList.get(groupPosition).getGroup());
 
-        groupDataBinding.chip.setOnLongClickListener(v -> {
-            RssEditFragmentDirections.ActionFragmentRssEditToDeleteDialogFragment action = RssEditFragmentDirections.actionFragmentRssEditToDeleteDialogFragment();
-            action.setGroup(groupWithRssUrlsList.get(groupPosition).getGroup());
-            navController.navigate(action);
-            return true;
-        });
+//        groupDataBinding.chip.setOnLongClickListener(v -> {
+//            RssEditFragmentDirections.ActionFragmentRssEditToDeleteDialogFragment action = RssEditFragmentDirections.actionFragmentRssEditToDeleteDialogFragment();
+//            action.setGroup(groupWithRssUrlsList.get(groupPosition).getGroup());
+//            return true;
+//        });
         return convertView;
     }
 
@@ -89,7 +96,6 @@ public class RssEditAdapter extends DataBindingExpandableListAdapter<ItemFragmen
         childDataBinding.chip.setOnLongClickListener(v -> {
             RssEditFragmentDirections.ActionFragmentRssEditToDeleteDialogFragment action = RssEditFragmentDirections.actionFragmentRssEditToDeleteDialogFragment();
             action.setRssUrl(groupWithRssUrlsList.get(groupPosition).getUrls().get(childPosition));
-            navController.navigate(action);
             return true;
         });
         return convertView;

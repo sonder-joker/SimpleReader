@@ -9,7 +9,9 @@ import androidx.annotation.LayoutRes;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
-public abstract class DataBindingExpandableListAdapter<GroupDataBinding extends ViewDataBinding, ChildDataBinding extends ViewDataBinding> extends BaseExpandableListAdapter {
+import java.util.List;
+
+public abstract class DataBindingExpandableListAdapter< GroupDataBinding extends ViewDataBinding, ChildDataBinding extends ViewDataBinding> extends BaseExpandableListAdapter {
     protected GroupDataBinding groupDataBinding;
 
     protected ChildDataBinding childDataBinding;
