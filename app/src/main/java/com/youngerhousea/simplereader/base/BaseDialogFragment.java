@@ -58,6 +58,7 @@ public abstract class BaseDialogFragment<T extends ViewDataBinding, V extends Ba
         dataBinding.setLifecycleOwner(this);
         navController = Navigation.findNavController(requireActivity(), R.id.fragment_nav_host);
 
+
         return super.onCreateDialog(savedInstanceState);
     }
 }

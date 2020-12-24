@@ -1,6 +1,10 @@
 package com.youngerhousea.simplereader.di;
 
-import com.youngerhousea.simplereader.AppExecutors;
+import android.os.Handler;
+import android.os.Looper;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import javax.inject.Singleton;
 
@@ -12,7 +16,8 @@ import dagger.hilt.components.SingletonComponent;
 @Module
 @InstallIn(SingletonComponent.class)
 public class PoolModule {
-    private AppExecutors appExecutors = new AppExecutors();
+    private final AppExecutors appExecutors = new AppExecutors();
+
     @Singleton
     @Provides
     public AppExecutors getAppExecutors() {

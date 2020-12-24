@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_news"
-        android:name="com.youngerhousea.simplereader.fragment.NewsFragment"
+        android:name="com.youngerhousea.simplereader.view.NewsFragment"
         android:label="News">
         <action
             android:id="@+id/action_fragment_news_to_fragment_collection"
@@ -19,51 +19,43 @@
 
     <fragment
         android:id="@+id/fragment_collection"
-        android:name="com.youngerhousea.simplereader.fragment.collection.CollectionFragment"
+        android:name="com.youngerhousea.simplereader.view.collection.CollectionFragment"
         android:label="CollectionFragment">
         <action
             android:id="@+id/action_fragment_collection_to_dialog_fragment_add_group"
-            app:destination="@id/dialog_fragment_add_group" />
-        <action
-            android:id="@+id/action_fragment_collection_to_fragment_rss_add"
-            app:destination="@id/fragment_rss_add" />
-        <action
-            android:id="@+id/action_fragment_collection_to_rssSearchFragment"
-            app:destination="@id/fragment_rss_search" />
-        <action
-            android:id="@+id/action_fragment_collection_to_rssEditFragment"
-            app:destination="@id/fragment_rss_edit" />
+            app:destination="@id/dialog_rss_add" />
     </fragment>
 
     <fragment
         android:id="@+id/fragment_rss_add"
-        android:name="com.youngerhousea.simplereader.fragment.collection.RssAddFragment"
+        android:name="com.youngerhousea.simplereader.view.collection.RssAddFragment"
         android:label="Add Rss" />
 
     <fragment
         android:id="@+id/fragment_rss_edit"
-        android:name="com.youngerhousea.simplereader.fragment.collection.RssEditFragment"
+        android:name="com.youngerhousea.simplereader.view.collection.RssEditFragment"
         android:label="RssEditFragment" >
         <action
-            android:id="@+id/action_fragment_rss_edit_to_deleteDialogFragment"
-            app:destination="@id/dialog_fragment_delete" />
+            android:id="@+id/action_fragment_rss_edit_to_dialog_rss_delete"
+            app:destination="@id/dialog_rss_delete" />
     </fragment>
     <fragment
         android:id="@+id/fragment_rss_search"
-        android:name="com.youngerhousea.simplereader.fragment.collection.RssSearchFragment"
+        android:name="com.youngerhousea.simplereader.view.collection.RssSearchFragment"
         android:label="RssSearchFragment" />
 
     <dialog
-        android:id="@+id/dialog_fragment_add_group"
-        android:name="com.youngerhousea.simplereader.fragment.collection.AddGroupDialogFragment"
+        android:id="@+id/dialog_rss_add"
+        android:name="com.youngerhousea.simplereader.view.collection.RssAddDialog"
         android:label="AddGroupDialogFragment" />
     <fragment
         android:id="@+id/fragment_article"
-        android:name="com.youngerhousea.simplereader.fragment.ArticleFragment"
+        android:name="com.youngerhousea.simplereader.view.ArticleFragment"
         android:label="ArticleFragment"/>
+
     <dialog
-        android:id="@+id/dialog_fragment_delete"
-        android:name="com.youngerhousea.simplereader.fragment.collection.DeleteDialogFragment"
+        android:id="@+id/dialog_rss_delete"
+        android:name="com.youngerhousea.simplereader.view.collection.DeleteDialog"
         android:label="DeleteDialogFragment" >
         <argument
             android:name="group"

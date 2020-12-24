@@ -6,10 +6,10 @@ import androidx.lifecycle.Observer;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.prof.rssparser.Channel;
-import com.youngerhousea.simplereader.net.adapter.ChannelConverterFactory;
-import com.youngerhousea.simplereader.net.adapter.LiveDataCallAdapterFactory;
-import com.youngerhousea.simplereader.net.api.FetchRss;
-import com.youngerhousea.simplereader.repository.base.ApiResponse;
+import com.youngerhousea.simplereader.adapter.ChannelConverterFactory;
+import com.youngerhousea.simplereader.adapter.LiveDataCallAdapterFactory;
+import com.youngerhousea.simplereader.data.net.api.FetchRss;
+import com.youngerhousea.simplereader.base.ApiResponse;
 
 import org.junit.Before;
 import org.junit.Rule;

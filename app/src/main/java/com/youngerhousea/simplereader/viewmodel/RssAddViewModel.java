@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 
 import com.youngerhousea.simplereader.base.BaseViewModel;
-import com.youngerhousea.simplereader.repository.CollectionRepository;
+import com.youngerhousea.simplereader.data.repository.CollectionRepository;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +26,7 @@ public class RssAddViewModel extends BaseViewModel {
     }
 
     public void insertSubscribeRss() {
-        compositeDisposable.add(repository.insertSubscribeRss(groupId.getValue() + 1, urlToAdd.getValue()));
+        repository.insertSubscribeRss(groupId.getValue() + 1, urlToAdd.getValue());
         urlToAdd.setValue("");
     }
 

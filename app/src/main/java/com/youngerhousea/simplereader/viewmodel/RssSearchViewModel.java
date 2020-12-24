@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 
 import com.youngerhousea.simplereader.base.BaseViewModel;
-import com.youngerhousea.simplereader.repository.CollectionRepository;
+import com.youngerhousea.simplereader.data.repository.CollectionRepository;
 
 public class RssSearchViewModel extends BaseViewModel {
 

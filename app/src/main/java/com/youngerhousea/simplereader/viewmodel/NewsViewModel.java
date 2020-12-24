@@ -10,8 +10,8 @@ import androidx.lifecycle.Transformations;
 
 import com.youngerhousea.simplereader.base.BaseViewModel;
 import com.youngerhousea.simplereader.data.model.entity.RssSource;
-import com.youngerhousea.simplereader.repository.NewsRepository;
-import com.youngerhousea.simplereader.repository.base.Resource;
+import com.youngerhousea.simplereader.data.repository.NewsRepository;
+import com.youngerhousea.simplereader.base.Resource;
 
 import java.util.ArrayList;
 import java.util.List;

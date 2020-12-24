@@ -8,13 +8,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.youngerhousea.simplereader.R;
-import com.youngerhousea.simplereader.data.AppDatabase;
-import com.youngerhousea.simplereader.data.RssDao;
-import com.youngerhousea.simplereader.data.SourceDao;
-import com.youngerhousea.simplereader.data.model.entity.Group;
+import com.youngerhousea.simplereader.data.dao.AppDatabase;
+import com.youngerhousea.simplereader.data.dao.RssDao;
+import com.youngerhousea.simplereader.data.dao.SourceDao;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;

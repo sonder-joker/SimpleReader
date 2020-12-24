@@ -24,4 +24,7 @@
     <string name="dialog_fragment_collection_import">Import data</string>
     <string name="success_add">Success add</string>
     <string name="success_delete">Success delete</string>
+    <string name="fragment_collection_page_rss_add">ADD</string>
+    <string name="fragment_collection_page_rss_search">SEARCH</string>
+    <string name="fragment_collection_page_rss_edit">EDIT</string>
 </resources>

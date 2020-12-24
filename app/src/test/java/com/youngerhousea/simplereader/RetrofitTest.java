@@ -1,9 +1,9 @@
 package com.youngerhousea.simplereader;
 
 import com.prof.rssparser.Channel;
-import com.youngerhousea.simplereader.net.adapter.ChannelConverterFactory;
-import com.youngerhousea.simplereader.net.adapter.LiveDataCallAdapterFactory;
-import com.youngerhousea.simplereader.net.api.FetchRss;
+import com.youngerhousea.simplereader.adapter.ChannelConverterFactory;
+import com.youngerhousea.simplereader.adapter.LiveDataCallAdapterFactory;
+import com.youngerhousea.simplereader.data.net.api.FetchRss;
 
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;

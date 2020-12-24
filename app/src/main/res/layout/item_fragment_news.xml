@@ -4,15 +4,15 @@
 
     <data>
 
-        <import type="com.youngerhousea.simplereader.repository.base.Resource" />
+        <import type="com.youngerhousea.simplereader.base.Resource" />
 
-        <import type="com.youngerhousea.simplereader.repository.base.Status" />
+        <import type="com.youngerhousea.simplereader.base.Status" />
 
         <import type="com.youngerhousea.simplereader.data.model.entity.RssSource" />
 
         <variable
             name="resource"
-            type="Resource&lt;RssSource&gt;" />
+            type="com.youngerhousea.simplereader.base.Resource&lt;RssSource&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

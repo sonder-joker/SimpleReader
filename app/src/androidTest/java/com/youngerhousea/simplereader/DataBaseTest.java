@@ -3,27 +3,20 @@ package com.youngerhousea.simplereader;
 import android.content.Context;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.Transformations;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.prof.rssparser.Channel;
-import com.youngerhousea.simplereader.data.AppDatabase;
-import com.youngerhousea.simplereader.data.RssDao;
-import com.youngerhousea.simplereader.data.model.RssUrlAndRssSource;
+import com.youngerhousea.simplereader.data.dao.AppDatabase;
+import com.youngerhousea.simplereader.data.dao.RssDao;
 import com.youngerhousea.simplereader.data.model.entity.Group;
 import com.youngerhousea.simplereader.data.model.GroupIdAndRssUrl;
 import com.youngerhousea.simplereader.data.model.entity.RssSource;
-import com.youngerhousea.simplereader.data.model.entity.RssUrl;
-import com.youngerhousea.simplereader.net.adapter.ChannelConverterFactory;
-import com.youngerhousea.simplereader.net.adapter.LiveDataCallAdapterFactory;
-import com.youngerhousea.simplereader.net.api.FetchRss;
-import com.youngerhousea.simplereader.repository.base.ApiResponse;
-import com.youngerhousea.simplereader.repository.base.NetworkBoundResource;
-import com.youngerhousea.simplereader.repository.base.Resource;
+import com.youngerhousea.simplereader.adapter.ChannelConverterFactory;
+import com.youngerhousea.simplereader.adapter.LiveDataCallAdapterFactory;
+import com.youngerhousea.simplereader.data.net.api.FetchRss;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,9 +24,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.function.Consumer;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

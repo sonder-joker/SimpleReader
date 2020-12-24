@@ -1,10 +1,8 @@
 package com.youngerhousea.simplereader.di;
 
-import com.youngerhousea.simplereader.net.adapter.ChannelConverterFactory;
-import com.youngerhousea.simplereader.net.adapter.LiveDataCallAdapterFactory;
-import com.youngerhousea.simplereader.net.api.FetchRss;
-
-import java.util.concurrent.TimeUnit;
+import com.youngerhousea.simplereader.adapter.ChannelConverterFactory;
+import com.youngerhousea.simplereader.adapter.LiveDataCallAdapterFactory;
+import com.youngerhousea.simplereader.data.net.api.FetchRss;
 
 import javax.inject.Singleton;
 

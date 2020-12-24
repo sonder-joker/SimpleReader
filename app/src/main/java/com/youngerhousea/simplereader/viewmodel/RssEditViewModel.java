@@ -7,7 +7,7 @@ import com.youngerhousea.simplereader.base.BaseViewModel;
 import com.youngerhousea.simplereader.data.model.GroupWithRssUrls;
 import com.youngerhousea.simplereader.data.model.entity.Group;
 import com.youngerhousea.simplereader.data.model.entity.RssUrl;
-import com.youngerhousea.simplereader.repository.CollectionRepository;
+import com.youngerhousea.simplereader.data.repository.CollectionRepository;
 
 import java.util.List;
 

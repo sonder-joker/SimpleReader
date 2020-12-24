@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.data.model.entity.RssSource;
 import com.youngerhousea.simplereader.databinding.ItemFragmentNewsBinding;
-import com.youngerhousea.simplereader.fragment.NewsFragmentDirections;
-import com.youngerhousea.simplereader.repository.base.Resource;
-import com.youngerhousea.simplereader.repository.base.Status;
+import com.youngerhousea.simplereader.view.NewsFragmentDirections;
+import com.youngerhousea.simplereader.base.Resource;
 
 import java.util.List;
 
