@@ -6,9 +6,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.library.baseAdapters.BR;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.youngerhousea.simplereader.BR;
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.base.BaseDialogFragment;
 import com.youngerhousea.simplereader.data.model.entity.Group;

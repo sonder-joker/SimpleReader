@@ -22,7 +22,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
 
     @Nullable
     @Override
-    public CallAdapter<?, ?> get(@NotNull Type returnType, Annotation @NotNull [] annotations, @NotNull Retrofit retrofit) {
+    public CallAdapter<?, ?> get(@NotNull Type returnType, Annotation[] annotations, @NotNull Retrofit retrofit) {
         if (getRawType(returnType) != LiveData.class)
             return null;
 

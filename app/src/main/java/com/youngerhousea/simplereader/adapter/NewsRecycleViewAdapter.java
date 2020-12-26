@@ -1,35 +1,32 @@
 package com.youngerhousea.simplereader.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.FragmentNavigator;
+import androidx.recyclerview.widget.AsyncListDiffer;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.prof.rssparser.Article;
 import com.youngerhousea.simplereader.R;
-import com.youngerhousea.simplereader.data.model.entity.RssSource;
 import com.youngerhousea.simplereader.databinding.ItemFragmentNewsBinding;
-import com.youngerhousea.simplereader.view.NewsFragmentDirections;
-import com.youngerhousea.simplereader.base.Resource;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleViewAdapter.NewsViewHolder> {
-    private List<Resource<RssSource>> itemList;
 
-    public NewsRecycleViewAdapter(List<Resource<RssSource>> strings) {
-        this.itemList = strings;
+    private final AsyncListDiffer<Article> differ = new AsyncListDiffer<>(this, DIFF_CALLBACK);
+
+    public NewsRecycleViewAdapter() {
     }
 
-    public void setItemList(List<Resource<RssSource>> itemList) {
-        this.itemList = itemList;
-        notifyDataSetChanged();
+    public void setItemList(List<Article> itemList) {
+        differ.submitList(itemList);
     }
 
     @NonNull
@@ -47,27 +44,13 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        Resource<RssSource> resource = itemList.get(position);
-
-        holder.binding.setResource(resource);
-
-        holder.binding.executePendingBindings();
-        holder.binding.chip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavDirections action = NewsFragmentDirections.actionFragmentNewsToFragmentArticle();
-                FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder()
-                        .build();
-
-                Navigation.findNavController(v).navigate(action);
-
-            }
-        });
+        Article item = differ.getCurrentList().get(position);
+        holder.bind(item);
     }
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        return differ.getCurrentList().size();
     }
 
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
@@ -77,5 +60,22 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
             super(dataBinding.getRoot());
             this.binding = dataBinding;
         }
+
+        public void bind(Article article) {
+            binding.setResource(article);
+        }
     }
+
+
+    public static final DiffUtil.ItemCallback<Article> DIFF_CALLBACK = new DiffUtil.ItemCallback<Article>() {
+        @Override
+        public boolean areItemsTheSame(@NotNull Article oldItem, @NotNull Article newItem) {
+            return oldItem.equals(newItem);
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NotNull Article oldItem, @NotNull Article newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
 }

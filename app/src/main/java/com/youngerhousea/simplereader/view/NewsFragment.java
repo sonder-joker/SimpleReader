@@ -8,30 +8,22 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.prof.rssparser.Article;
 import com.youngerhousea.simplereader.BR;
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.adapter.NewsRecycleViewAdapter;
+import com.youngerhousea.simplereader.adapter.RecyclerItemClickListener;
 import com.youngerhousea.simplereader.base.BaseFragment;
-import com.youngerhousea.simplereader.base.Resource;
-import com.youngerhousea.simplereader.base.Status;
-import com.youngerhousea.simplereader.data.model.entity.RssSource;
-import com.youngerhousea.simplereader.databinding.FragmentNewsBinding;
 import com.youngerhousea.simplereader.viewmodel.NewsViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewModel> {
-    NewsRecycleViewAdapter adapter = new NewsRecycleViewAdapter(new ArrayList<>());
+public class NewsFragment extends BaseFragment<com.youngerhousea.simplereader.databinding.FragmentNewsBinding, NewsViewModel> {
+
 
     @Override
     public int getBindingViewModel() {
@@ -43,38 +35,33 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewMode
         return R.layout.fragment_news;
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setHasOptionsMenu(true);
         setRecycleView();
-
     }
 
     private void setRecycleView() {
-
-        viewModel.data.observe(getViewLifecycleOwner(), (List<Resource<RssSource>> resources) -> {
-            final boolean[] status = {true};
-            resources.forEach(new Consumer<Resource<RssSource>>() {
-                @Override
-                public void accept(Resource<RssSource> rssSourceResource) {
-                    if (rssSourceResource.getStatus() != Status.SUCCESS) {
-                        status[0] = false;
-                    }
-                }
-            });
-
-            List<Article> data = resources.stream().flatMap( (Resource<RssSource> rssSourceResource) -> {
-                return rssSourceResource.getData().getChannel().getArticles().stream();
-            }).collect(Collectors.toList());
-            adapter.setItemList(resources);
-        });
-
+        NewsRecycleViewAdapter adapter = new NewsRecycleViewAdapter();
+        viewModel.articleData.observe(getViewLifecycleOwner(), adapter::setItemList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         dataBinding.newsRecycleView.setLayoutManager(layoutManager);
         dataBinding.newsRecycleView.setAdapter(adapter);
+        dataBinding.newsRecycleView.addOnItemTouchListener(new RecyclerItemClickListener(this.getContext(), dataBinding.newsRecycleView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                NavDirections action = NewsFragmentDirections.actionFragmentNewsToFragmentArticle();
+                viewModel.setCurrentPosition(position);
+                navController.navigate(action);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+
     }
 
     @Override

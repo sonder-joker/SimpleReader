@@ -10,8 +10,9 @@ import com.youngerhousea.simplereader.BR;
 import com.youngerhousea.simplereader.R;
 import com.youngerhousea.simplereader.base.BaseFragment;
 import com.youngerhousea.simplereader.databinding.FragmentArticleBinding;
-import com.youngerhousea.simplereader.viewmodel.ArticleViewModel;
 import com.youngerhousea.simplereader.viewmodel.NewsViewModel;
+
+import org.jetbrains.annotations.NotNull;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -29,9 +30,8 @@ public class ArticleFragment extends BaseFragment<FragmentArticleBinding, NewsVi
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        System.out.println(viewModel.articleData.getValue().get(viewModel.currentPosition.getValue()));
     }
-
 }

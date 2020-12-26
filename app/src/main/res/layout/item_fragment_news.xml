@@ -3,28 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
-        <import type="com.youngerhousea.simplereader.base.Resource" />
-
-        <import type="com.youngerhousea.simplereader.base.Status" />
-
-        <import type="com.youngerhousea.simplereader.data.model.entity.RssSource" />
+        <import type="com.prof.rssparser.Article" />
 
         <variable
             name="resource"
-            type="com.youngerhousea.simplereader.base.Resource&lt;RssSource&gt;" />
+            type="Article" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:visibility="@{resource.status == Status.SUCCESS ?  0 :  1}">
+        android:layout_height="100dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/chip"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@{resource.status == Status.SUCCESS ? resource.data.channel.title : resource.message}"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@{resource.title}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
